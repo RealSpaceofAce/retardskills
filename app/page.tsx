@@ -782,19 +782,28 @@ export default function RetardSkillPage() {
             </div>
           </section>
 
-          {/* PRO RETARDMAXXERS — celebrity / press proof */}
+          {/* WHERE THIS COMES FROM — philosophy lineage, NOT customer endorsement */}
           <section className="rs-section rs-section-wide" style={{ marginBottom: 64 }}>
-            <p className="rs-section-eyebrow">Pro retardmaxxers</p>
-            <h2>The big names <em>already in</em>.</h2>
+            <p className="rs-section-eyebrow">Where this comes from</p>
+            <h2>The <em>philosophy</em> we built these on.</h2>
             <p style={{ marginBottom: 8 }}>
-              The philosophy isn&apos;t fringe. The world&apos;s loudest VCs and operators are publicly on the record &mdash; here&apos;s them, in their own words.
+              We didn&apos;t invent retardmaxxing &mdash; we turned it into a structural audit. Below: people who made the philosophy public. <strong style={{ color: 'var(--ink)' }}>Not users of these skills.</strong> Inspiration only.
             </p>
             <div className="rs-pro-grid">
+              <article className="rs-pro-card">
+                <p className="rs-pro-quote">&ldquo;Retardmaxxing is the art of not overthinking your exit from things that are making you miserable.&rdquo;</p>
+                <div className="rs-pro-meta">
+                  <p className="rs-pro-name">Elisha Long</p>
+                  <p className="rs-pro-attr">Originator of the philosophy</p>
+                  <a className="rs-pro-link" href="https://www.youtube.com/@ElishaLong" target="_blank" rel="noopener noreferrer">Watch the videos →</a>
+                </div>
+              </article>
+
               <article className="rs-pro-card">
                 <p className="rs-pro-quote">&ldquo;There&apos;s this guy on YouTube who has basically a hundred videos on retardmaxxing&hellip; he&apos;s like my new life coach.&rdquo;</p>
                 <div className="rs-pro-meta">
                   <p className="rs-pro-name">Marc Andreessen</p>
-                  <p className="rs-pro-attr">a16z &middot; on 20VC</p>
+                  <p className="rs-pro-attr">on the philosophy &middot; 20VC podcast</p>
                   <a className="rs-pro-link" href="https://www.youtube.com/watch?v=c4tvVKDhpiY" target="_blank" rel="noopener noreferrer">Watch the clip →</a>
                 </div>
               </article>
@@ -803,20 +812,14 @@ export default function RetardSkillPage() {
                 <p className="rs-pro-quote">&ldquo;Andreessen has been tweeting about this guy that he watches who posts these videos about retardmaxxing. I watched the videos.&rdquo;</p>
                 <div className="rs-pro-meta">
                   <p className="rs-pro-name">Chamath Palihapitiya</p>
-                  <p className="rs-pro-attr">Social Capital &middot; on the All-In Pod</p>
-                  <a className="rs-pro-link" href="https://x.com/theallinpod/status/2041207536360006013" target="_blank" rel="noopener noreferrer">See the clip →</a>
-                </div>
-              </article>
-
-              <article className="rs-pro-card">
-                <p className="rs-pro-quote">&ldquo;A genius.&rdquo;</p>
-                <div className="rs-pro-meta">
-                  <p className="rs-pro-name">Jason Calacanis</p>
-                  <p className="rs-pro-attr">Launch &middot; on Long, All-In Pod</p>
+                  <p className="rs-pro-attr">on the philosophy &middot; All-In Pod</p>
                   <a className="rs-pro-link" href="https://x.com/theallinpod/status/2041207536360006013" target="_blank" rel="noopener noreferrer">See the clip →</a>
                 </div>
               </article>
             </div>
+            <p style={{ marginTop: 18, fontSize: 13, fontStyle: 'italic', color: 'var(--ink-soft)' }}>
+              Quotes are about retardmaxxing the philosophy, not Retard Skills the product. None of the people above are customers (yet). We translated their thinking into a checklist anyone can run.
+            </p>
           </section>
 
           {/* APPROVED REVIEWS — renders only if there are any */}
