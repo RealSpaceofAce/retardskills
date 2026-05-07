@@ -116,6 +116,23 @@ export async function kitSubscribeAndTag(
       console.warn('[kit] tag apply failed', tagRes.status, await tagRes.text());
     }
 
+    // Step 3: add to the Welcome Sequence so Kit fires the welcome email.
+    // (Kit's v4 API doesn't expose tag-triggered Visual Automations, so we
+    // subscribe to the sequence directly here. New signups go Convex →
+    // Kit subscriber + tag + custom field + Welcome Sequence in one call.)
+    const sequenceId = Number(process.env.KIT_WELCOME_SEQUENCE_ID);
+    if (sequenceId && !Number.isNaN(sequenceId)) {
+      const seqRes = await fetch(
+        `${KIT_API_BASE}/sequences/${sequenceId}/subscribers/${subscriberId}`,
+        { method: 'POST', headers },
+      );
+      if (!seqRes.ok && seqRes.status !== 422) {
+        // 422 = already in sequence, fine.
+        // eslint-disable-next-line no-console
+        console.warn('[kit] sequence add failed', seqRes.status, await seqRes.text());
+      }
+    }
+
     return { subscriberId };
   } catch (err) {
     // eslint-disable-next-line no-console
