@@ -661,7 +661,7 @@ export default function RetardSkillPage() {
 
           {/* FORM — above the fold so the lead-magnet ask never gets buried */}
           <section className="rs-form-block" id="rs-form-block" style={{ marginBottom: 64 }}>
-            <span className="rs-form-label">Drop your email &mdash; skill in your inbox in 30 seconds</span>
+            <span className="rs-form-label">Drop your email &mdash; get your Retard Reports in 30 seconds</span>
             <RetardSkillSignup />
             <p className="rs-reassure">
               <strong>Free in beta.</strong> No spam &mdash; just new skills as they ship. Unsubscribe in one click.
