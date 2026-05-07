@@ -356,45 +356,6 @@ export default async function SkillsPage() {
             Six skills, one page. Copy any one to your clipboard or download the <code style={{ fontFamily: 'var(--font-sans)', fontSize: 14 }}>.md</code> file, paste into your AI, run on the right input for the skill. <strong>New skills appear here as they ship — self-updating, no reinstall.</strong>
           </p>
 
-          {/* INSTALL GUIDE — for first-timers */}
-          <details className="sk-install-guide" open>
-            <summary>
-              <span>First time? Install in 60 seconds.</span>
-              <span className="sk-install-toggle">+</span>
-            </summary>
-            <div className="sk-install-body">
-              <p className="sk-install-step">
-                <strong>Step 1.</strong> Pick a skill below. Click <em>Copy skill</em> (or <em>Download .md</em>). The skill is one Markdown file.
-              </p>
-              <p className="sk-install-step">
-                <strong>Step 2.</strong> Open your AI. Pick the path that matches what you have:
-              </p>
-              <ul className="sk-install-list">
-                <li>
-                  <strong>Claude (claude.ai):</strong> open a new chat, click the <em>+</em> attachment icon (or paste the skill text directly), then type: <code>run this on my homepage: yourwebsite.com</code>. Make sure Artifacts is on so the report renders inline.
-                </li>
-                <li>
-                  <strong>Claude Code:</strong> save the file to <code>~/.claude/skills/retardskill-marketing/SKILL.md</code> (matching the skill name), restart Claude Code, then run: <code>retardmaxx yourwebsite.com</code>.
-                </li>
-                <li>
-                  <strong>Codex (chatgpt.com/codex or the Codex CLI):</strong> open a new chat, paste the entire skill text as the system prompt or first message, then ask: <code>run this audit on yourwebsite.com</code>. Codex outputs the HTML report directly.
-                </li>
-                <li>
-                  <strong>Cursor:</strong> open a new chat, paste the skill text, ask: <code>run this on yourwebsite.com</code>. Cursor outputs HTML — copy it, paste into a <code>.html</code> file, double-click to open.
-                </li>
-                <li>
-                  <strong>Anywhere else (Gemini, Grok, etc.):</strong> paste the skill, ask it to audit your URL. If the AI can&apos;t output HTML cleanly, it&apos;ll still produce the 20-check breakdown in plain text.
-                </li>
-              </ul>
-              <p className="sk-install-step">
-                <strong>Step 3.</strong> The AI generates a Retard Report. Click the <strong>↓ Download PDF</strong> button at the top to save it.
-              </p>
-              <p className="sk-install-aside">
-                Stuck? The most common issue is pasting the file as an attachment instead of as text. If your AI doesn&apos;t respond to <code>retardmaxx</code>, paste the entire skill markdown as your message and ask the AI to follow it.
-              </p>
-            </div>
-          </details>
-
           <SkillCard
             id="marketing"
             name="Marketing"
@@ -448,6 +409,45 @@ export default async function SkillsPage() {
             filePath="/retard-skill-idea.md"
             fileBytesUrl="/retard-skill-idea.md"
           />
+
+          {/* INSTALL GUIDE — collapsed at the bottom for first-timers who need it */}
+          <details className="sk-install-guide" style={{ marginTop: 56 }}>
+            <summary>
+              <span>First time? Install in 60 seconds.</span>
+              <span className="sk-install-toggle">+</span>
+            </summary>
+            <div className="sk-install-body">
+              <p className="sk-install-step">
+                <strong>Step 1.</strong> Pick a skill above. Click <em>Copy skill</em> (or <em>Download .md</em>). The skill is one Markdown file.
+              </p>
+              <p className="sk-install-step">
+                <strong>Step 2.</strong> Open your AI. Pick the path that matches what you have:
+              </p>
+              <ul className="sk-install-list">
+                <li>
+                  <strong>Claude (claude.ai):</strong> open a new chat, click the <em>+</em> attachment icon (or paste the skill text directly), then ask the AI to run the skill on your input (URL, plan, sales call transcript, bio, pitch, or idea — depends on the skill). Make sure Artifacts is on so the report renders inline.
+                </li>
+                <li>
+                  <strong>Claude Code:</strong> save the file to <code>~/.claude/skills/retardskill-&lt;name&gt;/SKILL.md</code> (matching the skill name), restart Claude Code, then run <code>retardmaxx &lt;your input&gt;</code>.
+                </li>
+                <li>
+                  <strong>Codex (chatgpt.com/codex or the Codex CLI):</strong> open a new chat, paste the entire skill text as the system prompt or first message, then ask: <code>run this audit on &lt;your input&gt;</code>. Codex outputs the HTML report directly.
+                </li>
+                <li>
+                  <strong>Hermes / OpenClaw / any terminal-capable agent:</strong> drop the skill file where your harness reads skills (system prompt, custom instruction, skill folder), then run <code>retardmaxx &lt;your input&gt;</code>. The skill&rsquo;s frontmatter handles the rest.
+                </li>
+                <li>
+                  <strong>Anywhere else (Gemini, Grok, etc.):</strong> paste the skill, ask it to run the audit on your input. If the AI can&apos;t output HTML cleanly, it&apos;ll still produce the 20-check breakdown in plain text.
+                </li>
+              </ul>
+              <p className="sk-install-step">
+                <strong>Step 3.</strong> The AI generates a Retard Report. Click the <strong>↓ Download PDF</strong> button at the top to save it.
+              </p>
+              <p className="sk-install-aside">
+                Stuck? The most common issue is pasting the file as an attachment instead of as text. If your AI doesn&apos;t respond to <code>retardmaxx</code>, paste the entire skill markdown as your message and ask the AI to follow it.
+              </p>
+            </div>
+          </details>
 
           <div className="sk-footer">
             <p style={{ marginBottom: 16 }}>
