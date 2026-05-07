@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Page-level styles live inline in the route components (pages inject their
+   own CSS via <style> blocks for the editorial design system). This file
+   only handles global resets + Tailwind. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #FAFAF7;
+  color: #1A1A1A;
+}
+
+body {
+  font-family: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Honor user-set dark theme via the ThemeToggle button. */
+:root[data-rs-theme='dark'] body {
+  background: #0F0F10;
+  color: #FAFAF7;
+}
