@@ -101,30 +101,44 @@ const styles = `
     gap: 0;
     white-space: nowrap;
   }
-  .rs-title .span-1 { color: var(--ink);   font-size: 30vw; }
-  .rs-title .span-2 { color: var(--accent); font-size: 26vw; }
-  /* Cap the absolute size on huge displays so it doesn't get cartoonish. */
-  @media (min-width: 1700px) {
-    .rs-title .span-1 { font-size: 510px; }
-    .rs-title .span-2 { font-size: 440px; }
+  .rs-title .span-1 { color: var(--ink);    font-size: clamp(72px, 16vw, 240px); }
+  .rs-title .span-2 { color: var(--accent); font-size: clamp(64px, 14vw, 210px); }
+  /* On smaller phones, scale up so the words still feel anchored. */
+  @media (max-width: 700px) {
+    .rs-title .span-1 { font-size: 26vw; }
+    .rs-title .span-2 { font-size: 22vw; }
   }
   @media (max-width: 380px) {
     .rs-title { letter-spacing: -0.045em; }
   }
-  /* Optional scroll cue at the bottom of the hero. */
+  /* Scroll cue at the bottom of the hero. */
   .rs-hero-cue {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 40px;
     font-family: var(--font-sans);
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.32em;
     text-transform: uppercase;
-    color: var(--ink-faint);
+    color: var(--ink-soft);
     font-weight: 700;
-    margin-top: 32px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 160ms;
   }
-  .rs-hero-cue span { display: inline-block; transform: translateY(0); animation: rs-cue 1.6s ease-in-out infinite; }
+  .rs-hero-cue:hover { color: var(--accent); }
+  .rs-hero-cue .rs-cue-arrow {
+    display: inline-block;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--accent);
+    animation: rs-cue 1.6s ease-in-out infinite;
+  }
   @keyframes rs-cue {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(4px); }
+    0%, 100% { transform: translateY(0); opacity: 0.45; }
+    50%      { transform: translateY(8px); opacity: 1; }
   }
   @media (max-width: 380px) {
     .rs-title { letter-spacing: -0.045em; }
@@ -637,7 +651,10 @@ export default function RetardSkillPage() {
                 The retard only knows what they want. The retard isn&apos;t ashamed of what they want. <strong>The retard ships.</strong>
               </p>
             </div>
-            <p className="rs-hero-cue" aria-hidden="true"><span>Scroll ↓</span></p>
+            <a className="rs-hero-cue" href="#rs-form-block" aria-label="Read more skills">
+              <span>Read more skills</span>
+              <span className="rs-cue-arrow" aria-hidden="true">↓</span>
+            </a>
           </section>
 
           <div className="rs-content">
