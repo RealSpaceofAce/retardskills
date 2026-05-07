@@ -1,11 +1,16 @@
 /**
  * POST /api/signup
  *
- * Single-tap signup for the Retard Skill collection. Lead-magnet flow:
- * - Insert subscriber with source='retardskill_marketing'
- * - Mark confirmed immediately (skip double opt-in for the lead magnet)
- * - Fire welcome email with link to /retardskill/skills
- * - Return success with the redirect URL so the form can navigate the user
+ * Single-tap signup for Retard Skills. Lead-magnet flow:
+ * - Insert subscriber in Convex (source='retardskill_marketing')
+ * - Subscribe to Kit + tag + pass per-user welcome_link as custom field
+ *   (Kit's Welcome Sequence — configured in Kit UI — fires the welcome
+ *   email using {{ subscriber.fields.welcome_link }})
+ * - Set the access cookie on this device for immediate redirect to /skills
+ *
+ * No Resend call here — Kit owns user-facing email. Resend only fires from
+ * /api/review/submit for admin review notifications (you see those, users
+ * never do).
  *
  * Rate limit: 5/min per IP.
  */
@@ -15,9 +20,7 @@ import { NextResponse } from 'next/server';
 
 import { checkRequestRateLimit, createRateLimitHeaders } from "@/lib/api-rate-limit";
 import { runConvexAdminMutation } from "@/lib/convexAdmin";
-import { sendEmail } from "@/lib/email";
 import { kitSubscribeAndTag } from "@/lib/kit";
-import { wrapEmail, p, leadP, button, pullQuote } from "@/lib/email/template";
 import {
   RETARDSKILL_SESSION_COOKIE_NAME,
   createRetardSkillSessionToken,
@@ -61,29 +64,25 @@ export async function POST(request: Request): Promise<Response> {
       email,
     });
 
-    // Subscribe to the Retard Reports newsletter on Kit + apply signup tag.
-    // Fire-and-forget — Convex stays the source of truth, Kit sync is best-effort.
-    void kitSubscribeAndTag(email).catch((err) => {
+    const baseUrl = getBaseUrl(request);
+    const sessionToken = createRetardSkillSessionToken(email);
+    // Cross-device welcome link — when the user clicks it from email, /api/access
+    // verifies the token + sets their access cookie on whichever device opens it.
+    const welcomeLink = `${baseUrl}/api/access?t=${encodeURIComponent(sessionToken)}`;
+
+    // Subscribe to Kit + apply signup tag + pass welcome_link as a custom field.
+    // Kit's Welcome Sequence (configured in Kit UI) uses
+    // {{ subscriber.fields.welcome_link }} in the email body. On re-signup
+    // (same email), kitSubscribeAndTag updates the field so the next welcome
+    // email uses a fresh access link.
+    void kitSubscribeAndTag(email, {
+      fields: { welcome_link: welcomeLink },
+    }).catch((err) => {
       Sentry.captureException(err, { extra: { context: 'kit subscribe', email } });
     });
 
-    const baseUrl = getBaseUrl(request);
-    const sessionToken = createRetardSkillSessionToken(email);
-    // Email link goes through /api/access so the cookie is set on
-    // whichever device opens the email (cross-device flow).
-    const emailSkillsUrl = `${baseUrl}/api/access?t=${encodeURIComponent(sessionToken)}`;
-
-    // Welcome email — fire-and-forget on failure; subscriber row is saved either way.
-    void sendEmail({
-      to: email,
-      subject: 'Your Retard Skills collection is ready',
-      html: buildWelcomeHtml(emailSkillsUrl),
-    }).catch((error) => {
-      Sentry.captureException(error, { extra: { context: 'retardskill welcome email', email } });
-    });
-
-    // Set the access cookie on the signup device so the immediate redirect to
-    // /retardskill/skills passes the gate.
+    // Set the access cookie on the signup device so the immediate redirect
+    // to /skills passes the gate.
     const response = NextResponse.json({
       ok: true,
       redirect: '/skills',
@@ -95,22 +94,4 @@ export async function POST(request: Request): Promise<Response> {
     Sentry.captureException(error, { level: 'error' });
     return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400 });
   }
-}
-
-function buildWelcomeHtml(skillsUrl: string): string {
-  return wrapEmail({
-    eyebrow: "Retard Skills · You're in",
-    title: 'Your six skills are ready.',
-    preheader: 'All six Retard Skills unlocked. Open your collection.',
-    body: [
-      p("Marketing, Wants, Pitch, Bio, Sales, Idea &mdash; all live, all yours. Click the button to open your collection. Copy each skill to your clipboard or download the <code style=\"font-family:'IBM Plex Mono',monospace;font-size:0.9em;background:#E1E7FF;padding:1px 5px;border-radius:2px;\">.md</code> file."),
-      button(skillsUrl, 'Open your skills →'),
-      pullQuote("Paste any skill into Claude, Claude Code, Codex, Hermes, OpenClaw, or any terminal-capable agent. Run it on your URL, plan, sales call, bio, pitch, or idea. About 60 seconds later, you get a Retard Report &mdash; quote-and-fix, line by line."),
-      leadP('Self-updating.', 'Each skill checks for the latest version every run &mdash; new checks ship to your install automatically. No reinstalling, ever.'),
-      leadP('Newsletter is on.', 'You&rsquo;ll get a fresh real-world audit (Retard Reports) in your inbox each week. No drip, no upsell.'),
-      leadP('Lost this email later?', `Sign up again at <a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a> with the same address &mdash; we&rsquo;ll re-send the access link.`),
-    ].join(''),
-    closingSig: 'Built because I couldn&rsquo;t see my own bullshit. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst</strong>',
-    footer: 'transactional',
-  });
 }

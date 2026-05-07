@@ -1,0 +1,67 @@
+<!--
+  WELCOME EMAIL FOR KIT — paste this into Kit Sequences
+
+  Setup steps (one-time, in Kit UI):
+
+  1. Kit → Automate → Sequences → New Sequence
+  2. Name it "Retard Skills Welcome"
+  3. Add an email step (immediate / 0 delay)
+  4. Subject: "Your Retard Skills collection is ready"
+  5. Click "Source / HTML" mode (the {} icon — pastes raw HTML, not the
+     visual editor)
+  6. Paste the entire HTML below
+  7. Save the email
+  8. Set the Sequence trigger:
+     - Visual Automation → "When subscriber is added to tag
+       'retard-skills-signup' → Subscribe to Sequence 'Retard Skills
+       Welcome'"
+  9. Activate the automation
+
+  The {{ subscriber.fields.welcome_link }} liquid variable is filled per
+  user — each subscriber gets their own signed access link to /api/access.
+
+  If you change this welcome content later: edit the email step in the
+  Sequence directly. New subscribers get the updated version automatically.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Retard Skills collection is ready</title>
+</head>
+<body style="margin:0;padding:0;background:#FAFAF7;color:#1A1A1A;font-family:Charter,Georgia,'Iowan Old Style',serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;">
+  <div style="display:none;max-height:0;overflow:hidden;font-size:1px;line-height:1px;color:#FAFAF7;">All six Retard Skills unlocked. Open your collection.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAFAF7;padding:48px 24px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+        <tr><td>
+          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.22em;color:#4B6BFF;font-weight:700;margin:0 0 28px;">Retard Skills · You&rsquo;re in</p>
+          <h1 style="font-family:'Source Serif 4',Charter,Georgia,serif;font-weight:700;font-size:36px;line-height:1.05;letter-spacing:-0.02em;margin:0 0 24px;color:#1A1A1A;">Your six skills are ready.</h1>
+
+          <p style="margin:0 0 18px;color:#1A1A1A;">Marketing, Wants, Pitch, Bio, Sales, Idea &mdash; all live, all yours. Click the button to open your collection. Copy each skill to your clipboard or download the <code style="font-family:'IBM Plex Mono',monospace;font-size:0.9em;background:#E1E7FF;padding:1px 5px;border-radius:2px;">.md</code> file.</p>
+
+          <p style="margin:8px 0 32px;">
+            <a href="{{ subscriber.fields.welcome_link }}" style="display:inline-block;background:#4B6BFF;color:#FAFAF7;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;padding:14px 28px;border:1px solid #4B6BFF;">Open your skills →</a>
+          </p>
+
+          <p style="font-family:'Source Serif 4',Charter,Georgia,serif;font-style:italic;font-size:17px;color:#4A4A48;line-height:1.5;margin:0 0 28px;border-left:2px solid #1A1A1A;padding:6px 18px;">Paste any skill into Claude, Claude Code, Codex, Hermes, OpenClaw, or any terminal-capable agent. Run it on your URL, plan, sales call, bio, pitch, or idea. About 60 seconds later, you get a Retard Report &mdash; quote-and-fix, line by line.</p>
+
+          <p style="margin:0 0 18px;color:#1A1A1A;"><strong style="font-weight:700;">Self-updating.</strong> Each skill checks for the latest version every run &mdash; new checks ship to your install automatically. No reinstalling, ever.</p>
+
+          <p style="margin:0 0 18px;color:#1A1A1A;"><strong style="font-weight:700;">Newsletter is on.</strong> You&rsquo;ll get a fresh real-world audit (Retard Reports) in your inbox each week. No drip, no upsell.</p>
+
+          <p style="margin:0 0 18px;color:#1A1A1A;"><strong style="font-weight:700;">Lost this email later?</strong> Sign up again at <a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a> with the same address &mdash; you&rsquo;ll get a fresh access link.</p>
+
+          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#4A4A48;line-height:1.55;margin:32px 0 0;">Built because I couldn&rsquo;t see my own bullshit. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst</strong></p>
+
+          <hr style="border:0;border-top:1px solid #E5E3DC;margin:48px 0 24px;">
+
+          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#8A8A86;line-height:1.55;margin:0 0 8px;"><strong style="color:#1A1A1A;">Retard Skills</strong> &mdash; six clarity audits for not being an idiot.</p>
+          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;color:#8A8A86;line-height:1.55;margin:0;"><a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a></p>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>

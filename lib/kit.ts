@@ -33,7 +33,7 @@ function authHeaders() {
  */
 export async function kitSubscribeAndTag(
   email: string,
-  options: { tagId?: number; firstName?: string } = {},
+  options: { tagId?: number; firstName?: string; fields?: Record<string, string> } = {},
 ): Promise<{ subscriberId: number } | null> {
   const headers = authHeaders();
   if (!headers) return null;
@@ -49,6 +49,7 @@ export async function kitSubscribeAndTag(
       body: JSON.stringify({
         email_address: email,
         ...(options.firstName ? { first_name: options.firstName } : {}),
+        ...(options.fields ? { fields: options.fields } : {}),
         state: 'active',
       }),
     });
@@ -66,6 +67,7 @@ export async function kitSubscribeAndTag(
       | { subscriber?: { id: number } }
       | null;
     let subscriberId = createBody?.subscriber?.id;
+    const wasExistingSubscriber = !subscriberId;
 
     // If we hit the duplicate path, fetch the subscriber by email to get the id.
     if (!subscriberId) {
@@ -83,6 +85,23 @@ export async function kitSubscribeAndTag(
       // eslint-disable-next-line no-console
       console.warn('[kit] could not resolve subscriber id after create');
       return null;
+    }
+
+    // If this was an existing subscriber AND we're passing fields, refresh
+    // them via PUT — important when welcome_link rotates per signup attempt
+    // (cross-device flow: user re-signs up to get a new access token, we
+    // need Kit's stored field updated so the next welcome-sequence email
+    // uses the fresh link).
+    if (wasExistingSubscriber && options.fields) {
+      const updateRes = await fetch(`${KIT_API_BASE}/subscribers/${subscriberId}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({ fields: options.fields }),
+      });
+      if (!updateRes.ok && updateRes.status !== 422) {
+        // eslint-disable-next-line no-console
+        console.warn('[kit] subscriber field update failed', updateRes.status, await updateRes.text());
+      }
     }
 
     // Step 2: apply the signup tag.
