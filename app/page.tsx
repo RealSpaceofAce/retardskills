@@ -42,6 +42,24 @@ const styles = `
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  /* No-orphan rules — distribute headings evenly, prevent single-word orphans
+     in paragraphs across all viewports (desktop, tablet, mobile). */
+  .rs-root h1,
+  .rs-root h2,
+  .rs-root h3,
+  .rs-root .rs-tagline,
+  .rs-root .rs-headline,
+  .rs-root .rs-skill-name,
+  .rs-root .rs-pro-name,
+  .rs-root .rs-section h2 {
+    text-wrap: balance;
+  }
+  .rs-root p,
+  .rs-root .rs-faq-answer,
+  .rs-root .rs-skill-desc,
+  .rs-root .rs-pro-quote {
+    text-wrap: pretty;
+  }
   .rs-page {
     max-width: 1100px;
     margin: 0 auto;

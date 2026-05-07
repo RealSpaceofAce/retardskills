@@ -40,6 +40,9 @@ const styles = `
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
   }
+  /* No-orphan rules across all viewports. */
+  .sk-root h1, .sk-root h2, .sk-root h3, .sk-root .sk-tagline, .sk-root .sk-card-name, .sk-root .sk-install-guide summary { text-wrap: balance; }
+  .sk-root p, .sk-root .sk-card-desc, .sk-root .sk-howto-body p, .sk-root .sk-install-step, .sk-root .sk-install-list li { text-wrap: pretty; }
   .sk-page {
     max-width: 760px;
     margin: 0 auto;
