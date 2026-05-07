@@ -707,11 +707,8 @@ export default function RetardSkillPage() {
           <section className="rs-section rs-section-wide" style={{ marginBottom: 64 }}>
             <p className="rs-section-eyebrow">Six skills · One philosophy</p>
             <h2>Six skills. <em>All shipped.</em></h2>
-            <p style={{ marginBottom: 4 }}>
-              A collection for stripping every layer of overthinking until what&apos;s left is brutally simple. <strong style={{ color: 'var(--ink)' }}>Six surfaces. Same brutal mirror.</strong>
-            </p>
             <p style={{ marginBottom: 8 }}>
-              Twenty fixed checks, run against a different surface each time &mdash; website, plan, pitch, bio, sales call, raw idea. Same output every time: quote first, fix second, plain English.
+              <strong style={{ color: 'var(--ink)' }}>Six surfaces. One mirror.</strong>
             </p>
             <div className="rs-skill-grid">
               <article className="rs-skill-block live">
