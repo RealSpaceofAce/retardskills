@@ -86,6 +86,18 @@ This skill is a mirror, not a coach. It runs **22 cope-pattern checks** against 
 
 ---
 
+## intake — first thing to do
+
+If the user triggers the skill without providing the artifact (e.g., `retardmaxx my plan` with no text attached), ask exactly this:
+
+> *"Paste your plan, goal doc, vision statement, or 'this is the year I' commitment. Bullets or prose, longer is better."*
+
+Then wait. Don't start the audit until you have the text. Do **NOT** ask what they actually want, what's stopping them, or what they've tried — those questions are for the 22 checks, not the user.
+
+If the user provides text alongside the trigger, skip the intake and run.
+
+---
+
 ## input mode
 
 Text only. The user pastes their plan / goals doc / vision / resolution. No URL crawl. Run the 22 checks directly on the text.

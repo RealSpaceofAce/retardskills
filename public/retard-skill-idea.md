@@ -82,6 +82,18 @@ This skill is a mirror, not a coach. It runs **20 fixed checks** against a raw i
 
 ---
 
+## intake — first thing to do
+
+If the user triggers the skill without describing the idea (e.g., `retardmaxx my idea` with nothing attached), ask exactly this:
+
+> *"Describe the idea. What's the thing? Who would pay for it? What's the rough pitch? Don't optimize — describe it the way you'd say it to a friend at the bar. The closer to first-draft, the more useful the audit."*
+
+Then wait for the description. Don't start the audit until you have it. Do **NOT** ask follow-up questions like "what makes it different" or "what's the moat" — those are the audit's job.
+
+If the user provides a description alongside the trigger, skip the intake and run.
+
+---
+
 ## input mode
 
 The user describes the idea or pastes their concept text. Run the 20 checks directly. Don't ask follow-up questions before scoring.

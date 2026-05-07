@@ -96,6 +96,19 @@ Bad targets:
 ---
 
 
+## intake — first thing to do
+
+If the user triggers the skill without providing the artifact (e.g., they just type `retardmaxx my homepage` with no URL or text), ask exactly this:
+
+> *"Paste your URL or your copy. I'll fetch the page (or read the text) and run the 20 checks."*
+
+Then wait. Don't start the audit until you have the artifact. Do **NOT** ask what the page does, who it's for, or what makes it special — those questions are for the audit, not the user.
+
+If the user provides input alongside the trigger, skip the intake and run.
+
+---
+
+
 ## input modes
 
 

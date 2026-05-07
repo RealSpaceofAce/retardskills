@@ -80,6 +80,18 @@ This skill is a mirror, not a coach. It runs **20 fixed checks** against a sales
 
 ---
 
+## intake — first thing to do
+
+If the user triggers the skill without providing the transcript (e.g., `retardmaxx my sales call` with no text attached), ask exactly this:
+
+> *"Paste your call transcript. Gong, Fathom, Granola, Otter, Loom AI — most call recorders let you export the text. One transcript, or paste 3 lost-deal transcripts separated by `---` and I'll surface the recurring blind spot across calls."*
+
+Then wait. Don't start the audit until you have the transcript. Do **NOT** ask what the call was about, who the prospect was, or what the seller was trying to sell — those questions are for the 20 checks.
+
+If the user provides transcript text alongside the trigger, skip the intake and run. If they paste a multi-call bundle (separated by `---`), run the audit per-call AND surface the cross-call pattern in the synthesis.
+
+---
+
 ## input mode
 
 The user pastes the transcript. Run the 20 checks directly. **Don't ask the user what the call was about up front** — see the cold-read rule below.

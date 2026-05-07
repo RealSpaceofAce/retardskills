@@ -80,6 +80,18 @@ This skill is a mirror, not a coach. It runs **20 fixed checks** against a pitch
 
 ---
 
+## intake — first thing to do
+
+If the user triggers the skill without providing the artifact (e.g., `retardmaxx my pitch` with no text attached), ask exactly this:
+
+> *"Paste your deck text (slide-by-slide if possible), sales email, or one-pager. PDF? Copy out the text — slide titles + bullets are enough."*
+
+Then wait. Don't start the audit until you have the text. Do **NOT** ask what the company does, what they're raising, or who the audience is — those questions are for the 20 checks.
+
+If the user provides text alongside the trigger, skip the intake and run.
+
+---
+
 ## input mode
 
 The user pastes deck text (slide-by-slide if possible). For a deck, ask which slide is the title slide if not obvious. Run the 20 checks on the assembled text.

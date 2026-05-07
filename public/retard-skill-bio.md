@@ -82,6 +82,18 @@ The retard reads bios. The retard makes a snap judgment in three lines. The reta
 
 ---
 
+## intake — first thing to do
+
+If the user triggers the skill without providing the bio (e.g., `retardmaxx my bio` with no text attached), ask exactly this:
+
+> *"Paste your bio. LinkedIn About, X bio, About-page copy, founder bio — whatever you've got. A LinkedIn URL works too; I'll grab the About section."*
+
+Then wait. Don't start the audit until you have the bio. Do **NOT** ask what they do, who their audience is, or what makes them special — those questions are for the 20 checks.
+
+If the user provides bio text alongside the trigger, skip the intake and run.
+
+---
+
 ## input mode
 
 The user pastes the bio text. If they give a LinkedIn URL, fetch the About section. Run the 20 checks directly.

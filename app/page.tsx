@@ -188,13 +188,22 @@ const styles = `
   }
   .rs-form-label {
     font-family: var(--font-sans);
-    font-size: 12px;
+    font-size: clamp(10px, 1.6vw, 12px);
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.16em;
     font-weight: 700;
     color: var(--ink-soft);
     margin-bottom: 14px;
     display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 520px) {
+    .rs-form-label { letter-spacing: 0.1em; font-size: 10px; }
+  }
+  @media (max-width: 380px) {
+    .rs-form-label { letter-spacing: 0.06em; font-size: 9px; }
   }
 
   /* Sections */
