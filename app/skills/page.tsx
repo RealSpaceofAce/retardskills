@@ -414,7 +414,7 @@ export default async function SkillsPage() {
             id="wants"
             name="Wants"
             status="live"
-            description="You don't want the diet plan. You want to lose the weight. Retard Skills —Wants strips your personal plan, vision document, or 'this is the year I' commitment down to what you actually want — and surfaces the cope you've buried it under. Built off Elisha Long's verbatim catalog."
+            description="You already know the answer — you're shopping for permission. Retard Skills — Wants works on plans, vision docs, AND active decision debates (should I X or Y, am I overthinking this, help me decide). Twenty-two cope-pattern checks cut through your own overthinking to surface what you actually want. Built off Elisha Long's verbatim catalog."
             filePath="/retard-skill-wants.md"
             fileBytesUrl="/retard-skill-wants.md"
           />

@@ -17,6 +17,7 @@ import { checkRequestRateLimit, createRateLimitHeaders } from "@/lib/api-rate-li
 import { runConvexAdminMutation } from "@/lib/convexAdmin";
 import { sendEmail } from "@/lib/email";
 import { kitSubscribeAndTag } from "@/lib/kit";
+import { wrapEmail, p, leadP, button, pullQuote } from "@/lib/email/template";
 import {
   RETARDSKILL_SESSION_COOKIE_NAME,
   createRetardSkillSessionToken,
@@ -97,37 +98,19 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 function buildWelcomeHtml(skillsUrl: string): string {
-  // Plain, readable, brand-consistent. Inline CSS only — email clients hate stylesheets.
-  return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#FAFAF7;color:#1A1A1A;font-family:Charter,Georgia,'Iowan Old Style',serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;">
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#FAFAF7;padding:48px 24px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
-        <tr><td>
-          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:0.22em;color:#4B6BFF;font-weight:700;margin:0 0 24px;">Retard Skill · You&apos;re in</p>
-          <h1 style="font-family:'Source Serif 4',Charter,Georgia,serif;font-weight:700;font-size:40px;line-height:1.05;letter-spacing:-0.02em;margin:0 0 16px;color:#1A1A1A;">Your skill is ready.</h1>
-          <p style="margin:0 0 24px;color:#1A1A1A;">The Marketing skill is live in your collection. Click the button below to grab it &mdash; copy to your clipboard or download the <code style="font-family:'IBM Plex Mono',monospace;font-size:0.9em;background:#E1E7FF;padding:1px 5px;border-radius:2px;">.md</code> file.</p>
-          <p style="margin:0 0 32px;">
-            <a href="${skillsUrl}" style="display:inline-block;background:#4B6BFF;color:#FAFAF7;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;padding:14px 28px;border:1px solid #4B6BFF;">Open your skills →</a>
-          </p>
-          <p style="font-family:'Source Serif 4',Charter,Georgia,serif;font-style:italic;font-size:16px;color:#4A4A48;line-height:1.55;margin:0 0 32px;border-left:2px solid #1A1A1A;padding:6px 16px;">
-            Paste the skill into Claude, ChatGPT, Cursor, or Claude Code. Type your URL. About 60 seconds later, you get a polished editorial Retard Report &mdash; quote-and-fix, line by line.
-          </p>
-          <p style="margin:0 0 12px;color:#1A1A1A;"><strong style="font-weight:700;">Self-updating.</strong> The skill checks for the latest version every time you run it &mdash; new checks and fixes ship to your install automatically. No reinstalling.</p>
-          <p style="margin:0 0 12px;color:#1A1A1A;"><strong style="font-weight:700;">More skills are coming:</strong> Goals, Pitch, Bio, Resume, Idea. They&apos;ll appear at the same link as they ship. You&apos;ll get one email each &mdash; no drip, no upsell.</p>
-          <hr style="border:0;border-top:1px solid #E5E3DC;margin:48px 0 24px;">
-          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#8A8A86;line-height:1.55;margin:0;">
-            Built by a founder who got tired of his own bullshit copy. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst, BossMode</strong>
-          </p>
-          <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;color:#8A8A86;margin:16px 0 0;">
-            Brought to you by <a href="https://bossmode.ing" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">BossMode</a> &mdash; the AI staff that runs your business while you stay the owner.
-          </p>
-        </td></tr>
-      </table>
-    </td></tr>
-  </table>
-</body>
-</html>`;
+  return wrapEmail({
+    eyebrow: "Retard Skills · You're in",
+    title: 'Your six skills are ready.',
+    preheader: 'All six Retard Skills unlocked. Open your collection.',
+    body: [
+      p("Marketing, Wants, Pitch, Bio, Sales, Idea &mdash; all live, all yours. Click the button to open your collection. Copy each skill to your clipboard or download the <code style=\"font-family:'IBM Plex Mono',monospace;font-size:0.9em;background:#E1E7FF;padding:1px 5px;border-radius:2px;\">.md</code> file."),
+      button(skillsUrl, 'Open your skills →'),
+      pullQuote("Paste any skill into Claude, Claude Code, Codex, Hermes, OpenClaw, or any terminal-capable agent. Run it on your URL, plan, sales call, bio, pitch, or idea. About 60 seconds later, you get a Retard Report &mdash; quote-and-fix, line by line."),
+      leadP('Self-updating.', 'Each skill checks for the latest version every run &mdash; new checks ship to your install automatically. No reinstalling, ever.'),
+      leadP('Newsletter is on.', 'You&rsquo;ll get a fresh real-world audit (Retard Reports) in your inbox each week. No drip, no upsell.'),
+      leadP('Lost this email later?', `Sign up again at <a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a> with the same address &mdash; we&rsquo;ll re-send the access link.`),
+    ].join(''),
+    closingSig: 'Built by a founder who got tired of his own bullshit copy. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst, BossMode</strong>',
+    footer: 'transactional',
+  });
 }

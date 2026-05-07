@@ -755,8 +755,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Wants</h3>
-                <p className="rs-skill-quote">&ldquo;You don&apos;t want the diet plan. You want to lose the weight.&rdquo;</p>
-                <p className="rs-skill-desc">Strips your plan, vision doc, or &ldquo;this is the year I&rdquo; commitment down to what you actually want &mdash; and surfaces the cope you&apos;ve buried it under.</p>
+                <p className="rs-skill-quote">&ldquo;You already know the answer. You&apos;re shopping for permission.&rdquo;</p>
+                <p className="rs-skill-desc">Plans, vision docs, &ldquo;this is the year I&rdquo; commitments &mdash; AND active decision debates (&ldquo;should I X or Y?&rdquo;). Cuts through your own overthinking to surface what you actually want.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
 
