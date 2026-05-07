@@ -651,8 +651,8 @@ export default function RetardSkillPage() {
                 The retard only knows what they want. The retard isn&apos;t ashamed of what they want. <strong>The retard ships.</strong>
               </p>
             </div>
-            <a className="rs-hero-cue" href="#rs-form-block" aria-label="Read more skills">
-              <span>Read more skills</span>
+            <a className="rs-hero-cue" href="#rs-form-block" aria-label="Go retarded">
+              <span>Go retarded</span>
               <span className="rs-cue-arrow" aria-hidden="true">↓</span>
             </a>
           </section>
@@ -828,11 +828,15 @@ export default function RetardSkillPage() {
           {/* FAQ */}
           <section className="rs-section">
             <p className="rs-section-eyebrow">Questions the skeptic asks</p>
-            <h2>Five things you&apos;re wondering.</h2>
+            <h2>Six things you&apos;re wondering.</h2>
             <div className="rs-faq">
               <details>
                 <summary>Is it really free?</summary>
-                <p className="rs-faq-answer">Free in beta. The skill is the lead magnet &mdash; <a href="https://bossmode.ing" style={{ color: 'var(--ink)', borderBottom: '1px solid var(--rule)', textDecoration: 'none' }}>BossMode</a> is the product. We give the skill so you experience the thinking. No card, no trial, no &ldquo;upgrade to unlock.&rdquo;</p>
+                <p className="rs-faq-answer">Free in beta. By <a href="https://bossmode.ing" style={{ color: 'var(--ink)', borderBottom: '1px solid var(--rule)', textDecoration: 'none' }}>BossMode</a> &mdash; we&rsquo;re about freedom for owners. No card, no trial.</p>
+              </details>
+              <details>
+                <summary>Will it work with my agent harness?</summary>
+                <p className="rs-faq-answer">Yes. Anything that runs in the terminal works &mdash; <strong style={{ color: 'var(--ink)' }}>Hermes</strong>, <strong style={{ color: 'var(--ink)' }}>OpenClaw</strong>, <strong style={{ color: 'var(--ink)' }}>Claude Code</strong>, <strong style={{ color: 'var(--ink)' }}>Codex CLI</strong>, <strong style={{ color: 'var(--ink)' }}>Cursor</strong>, custom agents, whatever you&rsquo;ve built. The skill is one Markdown file. Drop it where your harness reads skills (system prompt, custom instruction, skill folder), then run <code style={{ fontFamily: 'var(--font-sans)', fontSize: 13, background: 'transparent', borderBottom: '1px solid var(--rule)' }}>retardmaxx [URL]</code>. The skill file&rsquo;s frontmatter handles the rest.</p>
               </details>
               <details>
                 <summary>Do I need Claude Code? Will my LLM produce the HTML report?</summary>
@@ -869,6 +873,13 @@ export default function RetardSkillPage() {
             </p>
             <p style={{ marginTop: 8 }}>
               The AI staff that runs your business while you stay the owner.
+            </p>
+            <p style={{ marginTop: 32, fontSize: 11, letterSpacing: '0.06em', color: 'var(--ink-faint)' }}>
+              © {new Date().getFullYear()} BossMode. All rights reserved.{' '}
+              <span aria-hidden="true">·</span>{' '}
+              <a href="https://bossmode.ing/terms" style={{ color: 'inherit' }}>Terms</a>{' '}
+              <span aria-hidden="true">·</span>{' '}
+              <a href="https://bossmode.ing/privacy" style={{ color: 'inherit' }}>Privacy</a>
             </p>
           </div>
 
