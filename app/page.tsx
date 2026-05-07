@@ -688,15 +688,15 @@ export default function RetardSkillPage() {
             <div className="rs-howitworks">
               <div className="rs-step">
                 <p className="rs-step-num">01</p>
-                <p className="rs-step-body">Drop your email above.</p>
+                <p className="rs-step-body">Drop your email.</p>
               </div>
               <div className="rs-step">
                 <p className="rs-step-num">02</p>
-                <p className="rs-step-body">Skill lands in your inbox &mdash; one file.</p>
+                <p className="rs-step-body">All six skills, one page.</p>
               </div>
               <div className="rs-step">
                 <p className="rs-step-num">03</p>
-                <p className="rs-step-body">Paste into Claude, Claude Code, Codex, Hermes, or OpenClaw. Run it on your URL, plan, call, bio, pitch, or idea.</p>
+                <p className="rs-step-body">Paste into your AI. Run.</p>
               </div>
             </div>
           </section>
