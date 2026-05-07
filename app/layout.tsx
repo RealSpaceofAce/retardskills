@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { Big_Shoulders_Display, IBM_Plex_Mono, Inter, Source_Serif_4 } from 'next/font/google';
+import { Big_Shoulders, IBM_Plex_Mono, Inter, Source_Serif_4 } from 'next/font/google';
 
 import './globals.css';
 
-const bigShoulders = Big_Shoulders_Display({
+const bigShoulders = Big_Shoulders({
   subsets: ['latin'],
   weight: ['800', '900'],
   variable: '--font-big-shoulders',
