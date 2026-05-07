@@ -700,11 +700,8 @@ export default function RetardSkillPage() {
           <section className="rs-section" style={{ marginBottom: 56 }}>
             <p className="rs-section-eyebrow">What you get when you run it</p>
             <h2 style={{ marginBottom: 20 }}>The <em>Retard Report.</em></h2>
-            <p style={{ marginBottom: 16 }}>
-              Overthinking is what&rsquo;s costing you the customer, the deal, the partner, the goal you wrote five years ago. <strong style={{ color: 'var(--ink)' }}>Six skills cut through your own.</strong>
-            </p>
             <p style={{ marginBottom: 32 }}>
-              A line-by-line audit. Every line that&rsquo;s costing you, quoted. The fix, written. About 60 seconds, you get this:
+              Overthinking is what&rsquo;s costing you the customer, the deal, the partner, the goal you wrote five years ago. <strong style={{ color: 'var(--ink)' }}>Six skills cut through your own.</strong>
             </p>
             <ReportPreview />
             <p className="rs-aside" style={{ marginTop: -32 }}>
