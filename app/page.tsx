@@ -45,7 +45,7 @@ const styles = `
   .rs-page {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 56px 24px 96px;
+    padding: 0 24px 96px;
     text-align: center;
   }
   .rs-content {
@@ -53,18 +53,27 @@ const styles = `
     margin: 0 auto;
   }
   @media (max-width: 768px) {
-    .rs-page { padding: 44px 20px 64px; }
+    .rs-page { padding: 0 20px 64px; }
   }
   @media (max-width: 480px) {
-    .rs-page { padding: 36px 18px 56px; }
+    .rs-page { padding: 0 18px 56px; }
   }
 
   /* Hero — compacted so the email form lives above the fold */
+  /* Hero is a full-viewport takeover. Visitor sees ONLY the title block on
+     first paint; everything else (form, report preview, skills grid…) lives
+     below the fold and reveals on scroll. */
   .rs-hero {
-    margin-bottom: 32px;
+    min-height: 100vh;
+    margin-bottom: 0;
+    padding: 32px 0 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .rs-hero-text {
-    max-width: 600px;
+    max-width: 720px;
     margin: 0 auto;
   }
   .rs-eyebrow {
@@ -74,36 +83,48 @@ const styles = `
     letter-spacing: 0.32em;
     color: var(--accent);
     font-weight: 700;
-    margin-bottom: 18px;
+    margin-bottom: 24px;
   }
+  /* Title stacks vertically and each word is sized to fill the viewport edge-to-edge.
+     Big Shoulders Display 900 at this scale uses about 0.50em per character;
+     RETARD (6 chars) and SKILLS. (7 chars) are sized to ~92% of viewport width. */
   .rs-title {
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: clamp(56px, 12vw, 156px);
-    line-height: 0.92;
-    letter-spacing: -0.035em;
+    line-height: 0.86;
+    letter-spacing: -0.04em;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    margin: 0 0 28px;
     display: flex;
-    justify-content: center;
-    gap: 0.18em;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
     white-space: nowrap;
-    flex-wrap: wrap;
   }
-  .rs-title .span-1 { color: var(--ink); }
-  .rs-title .span-2 { color: var(--accent); }
-  /* On mobile, stack the two words vertically and scale each to fill viewport width edge-to-edge. */
-  @media (max-width: 700px) {
-    .rs-title {
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      letter-spacing: -0.04em;
-      line-height: 0.88;
-      white-space: normal;
-    }
-    .rs-title .span-1 { font-size: 30vw; }
-    .rs-title .span-2 { font-size: 26vw; }
+  .rs-title .span-1 { color: var(--ink);   font-size: 30vw; }
+  .rs-title .span-2 { color: var(--accent); font-size: 26vw; }
+  /* Cap the absolute size on huge displays so it doesn't get cartoonish. */
+  @media (min-width: 1700px) {
+    .rs-title .span-1 { font-size: 510px; }
+    .rs-title .span-2 { font-size: 440px; }
+  }
+  @media (max-width: 380px) {
+    .rs-title { letter-spacing: -0.045em; }
+  }
+  /* Optional scroll cue at the bottom of the hero. */
+  .rs-hero-cue {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 700;
+    margin-top: 32px;
+  }
+  .rs-hero-cue span { display: inline-block; transform: translateY(0); animation: rs-cue 1.6s ease-in-out infinite; }
+  @keyframes rs-cue {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
   }
   @media (max-width: 380px) {
     .rs-title { letter-spacing: -0.045em; }
@@ -616,6 +637,7 @@ export default function RetardSkillPage() {
                 The retard only knows what they want. The retard isn&apos;t ashamed of what they want. <strong>The retard ships.</strong>
               </p>
             </div>
+            <p className="rs-hero-cue" aria-hidden="true"><span>Scroll ↓</span></p>
           </section>
 
           <div className="rs-content">
