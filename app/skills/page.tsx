@@ -402,7 +402,7 @@ export default async function SkillsPage() {
             id="marketing"
             name="Marketing"
             status="live"
-            description="The retard doesn't know what your website does. They hit a big word and bounce. Retard Skills —Marketing audits your homepage, landing page, copy, ads, or pitch text against twenty patterns of overcomplication and tells you exactly where the retard walked, and what to say instead."
+            description="You're overthinking your copy. Retard Skills — Marketing is a mirror for your homepage, landing page, ads, or pitch text. Twenty checks for where YOU hid the thing under jargon, performance, hedging, and adjective-stacking. The cold-reader test is one symptom; your overthinking is the cause."
             filePath="/retard-skill-marketing.md"
             fileBytesUrl="/retard-skill-marketing.md"
           />
@@ -420,7 +420,7 @@ export default async function SkillsPage() {
             id="pitch"
             name="Pitch"
             status="live"
-            description="The retard is the investor at the back of the room with their phone out. Retard Skills —Pitch tells you which slide loses them, which line they re-read, and which claim they don't believe. Decks, sales emails, fundraising one-pagers."
+            description="You're philosophizing and hedging the ask. Retard Skills — Pitch audits decks, sales emails, fundraising one-pagers — for every line where YOU buried the ask, hedged the claim, or performed thought-leadership instead of selling. The retard founder names what you sell, who buys, what you want."
             filePath="/retard-skill-pitch.md"
             fileBytesUrl="/retard-skill-pitch.md"
           />
@@ -429,7 +429,7 @@ export default async function SkillsPage() {
             id="bio"
             name="Bio"
             status="live"
-            description="The retard reads three lines of your LinkedIn and decides who you are. Retard Skills —Bio surfaces every line where you've gone hollow — performed an identity instead of naming what you actually do. Works on LinkedIn, X, About pages, founder bios."
+            description="You're performing an identity. Retard Skills — Bio audits LinkedIn, X, About pages, founder bios — for every line where YOU hid behind adjectives, borrowed credentials, and missions instead of naming what you shipped. The retard names the action."
             filePath="/retard-skill-bio.md"
             fileBytesUrl="/retard-skill-bio.md"
           />
@@ -438,7 +438,7 @@ export default async function SkillsPage() {
             id="sales"
             name="Sales"
             status="live"
-            description="The retard prospect bounced at minute three. You didn't notice. Retard Skills —Sales audits a sales call transcript and tells you, line by line, where you lost them. Run it on your last 3 lost deals — the recurring blind spot will surface."
+            description="You're over-explaining and placating on calls. Retard Skills — Sales audits sales call transcripts for every line where YOU monologued, performed methodology, hedged, or asked permission to follow up. The retard salesperson asks the question and takes the answer. Run it on your last 3 lost deals."
             filePath="/retard-skill-sales.md"
             fileBytesUrl="/retard-skill-sales.md"
           />
@@ -447,7 +447,7 @@ export default async function SkillsPage() {
             id="idea"
             name="Idea"
             status="live"
-            description="The retard is the friend you'd pitch this to at a bar. Retard Skills —Idea tells you whether your friend would say 'yeah I'd buy that' or 'huh, why though?' before you spend six months building it. Stress-tests raw concepts pre-product."
+            description="You're building a vision doc instead of shipping. Retard Skills — Idea audits raw concepts pre-product for the cope: 5-year plans, framework-as-product, draft-23 polish, sunk-cost pre-commitment. The retard ideator describes in one line and ships draft 1."
             filePath="/retard-skill-idea.md"
             fileBytesUrl="/retard-skill-idea.md"
           />

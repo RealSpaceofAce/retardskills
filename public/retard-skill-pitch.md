@@ -21,9 +21,11 @@ version: 2026-05-06
 
 ---
 
-The skill that audits your pitch.
+The skill that audits your pitch — for **YOUR** philosophizing and hedging, not the investor's attention span.
 
-**The retard investor is at the back of the room with their phone out.** This skill audits a pitch deck, sales email, or fundraising one-pager and tells you which slide loses them, which line they re-read, and which claim they don't believe.
+**You're philosophizing. You're hedging every claim. You're burying the ask. The retard names what you sell, who buys, what you want. Audit yours.**
+
+Pitches fail because the founder over-thinks the narrative — every slide threaded with "at the intersection of," every metric hedged with "early signal," every ask softened to "would love to chat if it's a fit." That's the cope. The retard founder pitches in three sentences: *we sell X to Y, here's revenue and growth, we want $Z at $W cap.* No philosophy. No hedges. No "happy to follow up." The skill audits your deck/email/one-pager for every line where YOU are performing instead of selling.
 
 ---
 

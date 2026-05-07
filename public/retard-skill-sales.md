@@ -21,9 +21,11 @@ version: 2026-05-06
 
 ---
 
-The skill that audits sales call transcripts.
+The skill that audits sales call transcripts — for **YOUR** overthinking, not the prospect's confusion.
 
-**The retard prospect bounced at minute three. You didn't notice.** This skill reads your sales call transcript like a cold prospect would — and tells you exactly where you lost them, what you said that pushed them away, and what to say instead.
+**You're over-explaining. You're justifying. You're placating. The retard salesperson asks the question and takes the answer. Audit your call.**
+
+This is the counter-intuitive skill in the collection. Most "sales coaching" tells you to perform more — methodology, frameworks, BANT/SPIN/MEDDIC, scripts, mirroring, anchoring. That's the cope. The retard salesperson does none of it: short questions, brutal silence, takes "no" cleanly, names the price, names the next step, hangs up. The skill audits your transcript for every line where YOU were the idiot — over-explaining, hedging, monologuing, performing methodology, asking permission to follow up. The "prospect bounced" is the symptom; you talking too much is the cause.
 
 Built off Elisha Long's verbatim cope catalog applied to sales: every check is anchored in something he actually said about how people perform, hide, and avoid the thing that matters.
 

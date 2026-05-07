@@ -23,7 +23,9 @@ version: 2026-05-06
 
 ---
 
-A clarity audit for websites, landing pages, marketing copy, pitches, and any text trying to sell or explain something to cold traffic. Twenty fixed checks for overcomplication. **Idiot is the enemy of the Retard.** Idiot overthinks. Retard ships.
+**You're overthinking your copy. The retard says what they sell, who it's for, what it costs. Audit yours.**
+
+A mirror for websites, landing pages, marketing copy, pitches, and any text trying to sell or explain something. The skill audits where YOU hid the thing under jargon, performance, and hedging. The cold-reader test is one symptom; the deeper find is your own overthinking. Twenty fixed checks. **Idiot is the enemy of the Retard.** Idiot overthinks. Retard ships.
 
 ---
 

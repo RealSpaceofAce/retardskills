@@ -720,8 +720,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Marketing</h3>
-                <p className="rs-skill-quote">&ldquo;The retard doesn&apos;t know what your website does.&rdquo;</p>
-                <p className="rs-skill-desc">Audits homepages, landing pages, ads, and pitch copy. Catches jargon, mechanism-speak, weak CTAs, missing proof.</p>
+                <p className="rs-skill-quote">&ldquo;You&apos;re overthinking your copy. Audit yours.&rdquo;</p>
+                <p className="rs-skill-desc">Mirror for homepages, landing pages, ads, pitch copy. Catches where YOU hid the thing under jargon, performance, hedging, and adjective-stacking.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
 
@@ -742,8 +742,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Pitch</h3>
-                <p className="rs-skill-quote">&ldquo;The retard is the investor with their phone out.&rdquo;</p>
-                <p className="rs-skill-desc">Decks, sales emails, fundraising one-pagers. Tells you which slide loses them, which claim they don&apos;t believe.</p>
+                <p className="rs-skill-quote">&ldquo;You&apos;re philosophizing and hedging. Audit yours.&rdquo;</p>
+                <p className="rs-skill-desc">Decks, sales emails, fundraising one-pagers. Catches every slide where YOU buried the ask, hedged the claim, or performed thought-leadership instead of selling.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
 
@@ -753,8 +753,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Bio</h3>
-                <p className="rs-skill-quote">&ldquo;The retard reads three lines and decides who you are.&rdquo;</p>
-                <p className="rs-skill-desc">Cuts the LinkedIn-speak. Surfaces every line where you&apos;ve gone hollow &mdash; performed an identity instead of named what you do.</p>
+                <p className="rs-skill-quote">&ldquo;You&apos;re performing an identity. Audit yours.&rdquo;</p>
+                <p className="rs-skill-desc">LinkedIn, X, About pages, founder bios. Catches where YOU hid behind adjectives, borrowed credentials, and missions instead of naming what you shipped.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
 
@@ -764,8 +764,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Sales</h3>
-                <p className="rs-skill-quote">&ldquo;The retard prospect bounced at minute three. You didn&apos;t notice.&rdquo;</p>
-                <p className="rs-skill-desc">Audits sales call transcripts. Catches where you lost them &mdash; minute by minute. Run it on your last 3 lost deals.</p>
+                <p className="rs-skill-quote">&ldquo;You&apos;re over-explaining and placating. Audit your call.&rdquo;</p>
+                <p className="rs-skill-desc">Sales call transcripts. Catches every line where YOU monologued, performed methodology, hedged, or asked permission to follow up. The retard salesperson asks and listens.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
 
@@ -775,8 +775,8 @@ export default function RetardSkillPage() {
                   <span className="rs-skill-pill live">✓ Live</span>
                 </div>
                 <h3 className="rs-skill-name">Idea</h3>
-                <p className="rs-skill-quote">&ldquo;The retard at the bar would say yeah I&apos;d buy that &mdash; or huh, why though?&rdquo;</p>
-                <p className="rs-skill-desc">The bar test for your raw idea. Tells you if the concept has legs cold &mdash; before you spend six months building it.</p>
+                <p className="rs-skill-quote">&ldquo;You&apos;re building a vision doc instead of shipping. Audit yours.&rdquo;</p>
+                <p className="rs-skill-desc">Raw ideas pre-product. Catches the cope: 5-year plans, framework-as-product, draft-23 polish, sunk-cost pre-commitment. The retard ideator ships draft 1.</p>
                 <OpenSkillCTA>Open it →</OpenSkillCTA>
               </article>
             </div>

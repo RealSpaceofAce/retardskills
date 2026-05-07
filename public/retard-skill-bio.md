@@ -21,11 +21,13 @@ version: 2026-05-06
 
 ---
 
-The skill that audits your LinkedIn bio, X bio, About page, founder bio, or first-impression self-description.
+The skill that audits your LinkedIn bio, X bio, About page, founder bio, or first-impression self-description — for **YOUR** identity-performance, not the reader's snap judgment.
 
-**The retard reads three lines and decides who you are.** This skill audits where you've gone hollow — where you performed an identity instead of naming what you actually do.
+**You're performing an identity. The retard names what they shipped. Audit yours.**
 
-Built off Elisha Long's "don't go hollow" rule: identity collapses if the action stops. A bio that lists titles without a shipped artifact has gone hollow.
+Bios fail when the writer hides behind adjectives, borrowed credentials, mission statements, and virtues. "Passionate. Driven. Curious. Builder." That's hollow — Long's word for an identity claim disconnected from action. The retard writer skips the performance: "I help solo founders ship their first 10 customers. Last 6 did it in under 90 days." Verb. Number. Outcome. Done. The skill audits your bio for every line where YOU are performing instead of naming.
+
+Built off Elisha Long's "don't go hollow" rule: identity collapses if the action stops.
 
 ---
 

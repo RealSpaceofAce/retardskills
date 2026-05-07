@@ -21,11 +21,13 @@ version: 2026-05-06
 
 ---
 
-The skill that stress-tests your raw idea before you spend six months building it.
+The skill that stress-tests your raw idea — for **YOUR** vision-doc cope, not the friend-at-the-bar's verdict.
 
-**The retard is the friend you'd pitch this to at a bar.** Would they say "yeah I'd buy that" or "huh, why though?" This skill audits a raw idea or "I'm thinking of building X" notion and tells you whether the idea has legs cold.
+**You're building a vision doc. You're framework-as-product-ing. You're pre-editing draft 23. The retard ships draft 1. Audit yours.**
 
-Built off Elisha Long's "throw shit at the wall and see what sticks" philosophy. The skill doesn't tell you to pursue or kill the idea — it tells you whether the idea, as currently described, would survive a cold reading.
+Ideas die in the writer's head, not at the bar. The cope: 5-year plans, methodology-as-product, "I need to find my purpose first," draft-23 polish. The retard ideator describes the thing in one line, names who pays, ships an ugly draft, gets a real "yeah I'd buy that" or "huh why though?" from one actual person, iterates. The skill audits your description for every line where YOU are still in your head — vision-doc cope, framework-as-goal, sunk-cost pre-commitment, pre-edit. The bar test is the symptom; your overthinking is the cause.
+
+Built off Elisha Long's *"You don't need a PhD or a five-year plan; you need to act, fail, and keep moving."*
 
 ---
 
