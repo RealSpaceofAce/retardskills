@@ -353,14 +353,8 @@ export default async function SkillsPage() {
           </h1>
 
           <p className="sk-tagline">
-            Below is your skills collection. Copy any skill to your clipboard or download the <code style={{ fontFamily: 'var(--font-sans)', fontSize: 14 }}>.md</code> file. Then paste it into Claude, Codex, Cursor, or Claude Code and run it on your URL. <strong>New skills appear here as they ship.</strong>
+            Six skills, one page. Copy any one to your clipboard or download the <code style={{ fontFamily: 'var(--font-sans)', fontSize: 14 }}>.md</code> file, paste into your AI, run on the right input for the skill. <strong>New skills appear here as they ship — self-updating, no reinstall.</strong>
           </p>
-
-          <div className="sk-welcome">
-            <strong>One file per skill.</strong> No zip, no setup. Each skill is a single Markdown file you paste into your AI. The skill tells the AI exactly what to do; you just type your URL.
-            <br /><br />
-            <strong>Self-updating.</strong> Every time you run a skill, your AI pulls the latest version automatically. New checks and fixes ship to your install — you never reinstall.
-          </div>
 
           {/* INSTALL GUIDE — for first-timers */}
           <details className="sk-install-guide" open>

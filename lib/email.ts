@@ -50,7 +50,7 @@ interface ProHumanFallbackEmailOptions {
 export async function sendEmail(options: SendEmailOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
   try {
     const { data, error } = await getResendClient().emails.send({
-      from: 'BossMode <noreply@bossmode.ing>',
+      from: process.env.RESEND_FROM ?? 'Retard Skills <noreply@retardskills.com>',
       to: options.to,
       subject: sanitizeEmailText(options.subject),
       html: options.html,

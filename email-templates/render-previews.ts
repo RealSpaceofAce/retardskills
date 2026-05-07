@@ -25,7 +25,7 @@ const welcomeHtml = wrapEmail({
     leadP('Newsletter is on.', 'You&rsquo;ll get a fresh real-world audit (Retard Reports) in your inbox each week. No drip, no upsell.'),
     leadP('Lost this email later?', `Sign up again at <a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a> with the same address &mdash; we&rsquo;ll re-send the access link.`),
   ].join(''),
-  closingSig: 'Built by a founder who got tired of his own bullshit copy. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst, BossMode</strong>',
+  closingSig: 'Built because I couldn&rsquo;t see my own bullshit. <strong style="color:#1A1A1A;">&mdash; Aaron Ernst</strong>',
   footer: 'transactional',
 });
 

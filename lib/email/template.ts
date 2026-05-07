@@ -115,11 +115,14 @@ export function code(text: string): string {
    --------------------------------------------------------------------- */
 
 function transactionalFooter(): string {
+  // Welcome / receipt-style emails stay focused on Retard Skills only.
+  // The BossMode bridge lives in the newsletter footer (newsletterFooter()),
+  // not here — first-touch users shouldn't get brand-pivot whiplash.
   return `<p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;color:#8A8A86;line-height:1.55;margin:0 0 8px;">
     <strong style="color:#1A1A1A;">Retard Skills</strong> &mdash; six clarity audits for not being an idiot.
   </p>
   <p style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;color:#8A8A86;line-height:1.55;margin:0;">
-    Brought to you by <a href="https://bossmode.ing?utm_source=retardskills&utm_medium=email" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">BossMode</a> &mdash; the AI staff that runs your business while you stay the owner.
+    <a href="https://retardskills.com" style="color:#1A1A1A;border-bottom:1px solid #E5E3DC;text-decoration:none;">retardskills.com</a>
   </p>`;
 }
 
