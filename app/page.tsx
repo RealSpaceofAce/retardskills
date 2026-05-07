@@ -606,7 +606,7 @@ export default function RetardSkillPage() {
     description:
       'Six clarity audit skills for websites, plans, pitches, bios, sales calls, and raw ideas. Twenty fixed checks each. Retardmaxxing turned into a structural audit you can run on your own work.',
     applicationCategory: 'BusinessApplication',
-    operatingSystem: 'Any LLM (Claude, Codex, Cursor, Claude Code)',
+    operatingSystem: 'Any LLM or terminal agent (Claude, Claude Code, Codex, Hermes, OpenClaw)',
     offers: {
       '@type': 'Offer',
       price: '0',
@@ -639,7 +639,7 @@ export default function RetardSkillPage() {
 
           {/* HERO */}
           <section className="rs-hero">
-            <p className="rs-eyebrow">Retardmaxxing · A skill for not being an idiot</p>
+            <p className="rs-eyebrow">Retardmaxxing · Skills for not being an idiot</p>
 
             <h1 className="rs-title">
               <span className="span-1">Retard</span>
@@ -673,7 +673,7 @@ export default function RetardSkillPage() {
             <p className="rs-section-eyebrow">What you get when you run it</p>
             <h2 style={{ marginBottom: 32 }}>The <em>Retard Report.</em></h2>
             <p style={{ marginBottom: 32 }}>
-              The skill is one file you paste into Claude, Codex, Cursor, or Claude Code. Type your URL. About 60 seconds later, you get this:
+              Each skill is one Markdown file. Drop it into Claude, Claude Code, Codex, Hermes, OpenClaw, or any terminal-capable agent. Run it on the right input for that skill &mdash; a URL, a plan, a sales transcript, a bio, a pitch, or a raw idea. About 60 seconds later, you get this:
             </p>
             <ReportPreview />
             <p className="rs-aside" style={{ marginTop: -32 }}>
@@ -696,7 +696,7 @@ export default function RetardSkillPage() {
               </div>
               <div className="rs-step">
                 <p className="rs-step-num">03</p>
-                <p className="rs-step-body">Paste into Claude, Codex, Cursor, or Claude Code. Run it on your URL.</p>
+                <p className="rs-step-body">Paste into Claude, Claude Code, Codex, Hermes, or OpenClaw. Run it on your URL, plan, call, bio, pitch, or idea.</p>
               </div>
             </div>
           </section>
@@ -787,7 +787,7 @@ export default function RetardSkillPage() {
             <p className="rs-section-eyebrow">Where this comes from</p>
             <h2>The <em>philosophy</em> we built these on.</h2>
             <p style={{ marginBottom: 8 }}>
-              We didn&apos;t invent retardmaxxing &mdash; we turned it into a structural audit. Below: people who made the philosophy public. <strong style={{ color: 'var(--ink)' }}>Not users of these skills.</strong> Inspiration only.
+              We didn&apos;t invent retardmaxxing &mdash; we turned it into a structural audit. Below: the people who made the philosophy public. <em>Fingers crossed they pick up the skills too.</em>
             </p>
             <div className="rs-pro-grid">
               <article className="rs-pro-card">
@@ -817,9 +817,6 @@ export default function RetardSkillPage() {
                 </div>
               </article>
             </div>
-            <p style={{ marginTop: 18, fontSize: 13, fontStyle: 'italic', color: 'var(--ink-soft)' }}>
-              Quotes are about retardmaxxing the philosophy, not Retard Skills the product. None of the people above are customers (yet). We translated their thinking into a checklist anyone can run.
-            </p>
           </section>
 
           {/* APPROVED REVIEWS — renders only if there are any */}
