@@ -16,9 +16,10 @@ const styles = `
     --ok: #2F5D3A;
     --card: #FFFFFF;
     --chrome: #F0EFE9;
-    --font-display: 'Big Shoulders Display', 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-serif: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-display: var(--font-big-shoulders), var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-serif: var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
   }
   :root[data-rs-theme='dark'] {
     --paper: #0F0F10;
@@ -700,11 +701,11 @@ export default function RetardSkillPage() {
             <p className="rs-section-eyebrow">What you get when you run it</p>
             <h2 style={{ marginBottom: 32 }}>The <em>Retard Report.</em></h2>
             <p style={{ marginBottom: 32 }}>
-              Run a skill. About 60 seconds later, you get this:
+              A line-by-line audit. Every line that&rsquo;s costing you, quoted. The fix, written. About 60 seconds, you get this:
             </p>
             <ReportPreview />
             <p className="rs-aside" style={{ marginTop: -32 }}>
-              A polished editorial HTML report. Quote first, fix second. Hover the preview to pause.
+              Polished editorial HTML. Quote first, fix second, plain English. Hover the preview to pause.
             </p>
           </section>
 
