@@ -673,7 +673,7 @@ export default function RetardSkillPage() {
             <p className="rs-section-eyebrow">What you get when you run it</p>
             <h2 style={{ marginBottom: 32 }}>The <em>Retard Report.</em></h2>
             <p style={{ marginBottom: 32 }}>
-              Each skill is one Markdown file. Drop it into Claude, Claude Code, Codex, Hermes, OpenClaw, or any terminal-capable agent. Run it on the right input for that skill &mdash; a URL, a plan, a sales transcript, a bio, a pitch, or a raw idea. About 60 seconds later, you get this:
+              Run a skill. About 60 seconds later, you get this:
             </p>
             <ReportPreview />
             <p className="rs-aside" style={{ marginTop: -32 }}>
