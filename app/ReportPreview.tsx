@@ -2,9 +2,8 @@
  * ReportPreview — auto-scrolling animated mock of the Retard Report.
  *
  * Shows a scaled-down version of the actual editorial design system from
- * /Users/aaronernst/retard-report-bossmode-*.html, scrolling on a CSS
- * keyframe loop so a visitor sees what the deliverable looks like
- * before they drop their email.
+ * the report generator, scrolling on a CSS keyframe loop so a visitor sees
+ * what the deliverable looks like before they drop their email.
  *
  * No client JS — pure CSS animation, server-rendered.
  */

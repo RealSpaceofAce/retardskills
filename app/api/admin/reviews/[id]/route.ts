@@ -7,7 +7,8 @@
  */
 
 import { requireAdminRequest } from "@/lib/admin-request";
-import { runConvexAdminMutation, runConvexAdminQuery } from "@/lib/convexAdmin";
+import { runConvexAdminMutation } from "@/lib/convexAdmin";
+import { NO_STORE_HEADERS } from '@/lib/security';
 
 const ALLOWED_STATUS = new Set(['approved', 'rejected', 'pending']);
 
@@ -20,19 +21,19 @@ export async function POST(
 
   const { id } = await params;
   if (!id || typeof id !== 'string') {
-    return Response.json({ error: 'Missing review id' }, { status: 400 });
+    return Response.json({ error: 'Missing review id' }, { status: 400, headers: NO_STORE_HEADERS });
   }
 
   let body: { status?: string };
   try {
     body = (await request.json()) as { status?: string };
   } catch {
-    return Response.json({ error: 'Invalid body' }, { status: 400 });
+    return Response.json({ error: 'Invalid body' }, { status: 400, headers: NO_STORE_HEADERS });
   }
 
   const status = body.status;
   if (!status || !ALLOWED_STATUS.has(status)) {
-    return Response.json({ error: 'Invalid status' }, { status: 400 });
+    return Response.json({ error: 'Invalid status' }, { status: 400, headers: NO_STORE_HEADERS });
   }
 
   await runConvexAdminMutation('retardSkillReviews:setStatus', {
@@ -41,5 +42,5 @@ export async function POST(
     reviewedBy: 'admin',
   });
 
-  return Response.json({ ok: true });
+  return Response.json({ ok: true }, { headers: NO_STORE_HEADERS });
 }

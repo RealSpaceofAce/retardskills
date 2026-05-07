@@ -6,7 +6,8 @@
  */
 
 import { requireAdminRequest } from "@/lib/admin-request";
-import { runConvexAdminMutation, runConvexAdminQuery } from "@/lib/convexAdmin";
+import { runConvexAdminQuery } from "@/lib/convexAdmin";
+import { NO_STORE_HEADERS } from '@/lib/security';
 
 export async function GET(): Promise<Response> {
   const unauthorized = await requireAdminRequest();
@@ -14,5 +15,5 @@ export async function GET(): Promise<Response> {
 
   const reviews = await runConvexAdminQuery('retardSkillReviews:listAll', { limit: 200 });
 
-  return Response.json({ reviews });
+  return Response.json({ reviews }, { headers: NO_STORE_HEADERS });
 }

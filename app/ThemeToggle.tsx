@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -8,6 +8,16 @@ function getInitialTheme(): Theme {
   if (typeof document === 'undefined') return 'light';
   const attr = document.documentElement.getAttribute('data-rs-theme');
   return attr === 'dark' ? 'dark' : 'light';
+}
+
+function subscribeToTheme(callback: () => void) {
+  window.addEventListener('rs-theme-change', callback);
+  window.addEventListener('storage', callback);
+
+  return () => {
+    window.removeEventListener('rs-theme-change', callback);
+    window.removeEventListener('storage', callback);
+  };
 }
 
 const styles = `
@@ -44,29 +54,21 @@ const styles = `
 `;
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>('light');
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setTheme(getInitialTheme());
-    setMounted(true);
-  }, []);
+  const theme = useSyncExternalStore(subscribeToTheme, getInitialTheme, () => 'light' as Theme);
 
   function toggle() {
     const next: Theme = theme === 'light' ? 'dark' : 'light';
-    setTheme(next);
     document.documentElement.setAttribute('data-rs-theme', next);
     try {
       window.localStorage.setItem('rs-theme', next);
     } catch {
       // localStorage may be blocked (private mode, restricted iframe). Fail silently.
     }
+    window.dispatchEvent(new Event('rs-theme-change'));
   }
 
-  // Avoid hydration mismatch — server renders the light-mode label, then client
-  // swaps to whatever the persisted theme actually is.
-  const label = mounted ? (theme === 'dark' ? 'Light' : 'Dark') : 'Dark';
-  const glyph = mounted ? (theme === 'dark' ? '☀' : '☾') : '☾';
+  const label = theme === 'dark' ? 'Light' : 'Dark';
+  const glyph = theme === 'dark' ? '☀' : '☾';
 
   return (
     <>

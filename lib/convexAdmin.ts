@@ -1,3 +1,5 @@
+import 'server-only';
+
 /**
  * Minimal Convex admin client for retardskills.com.
  *

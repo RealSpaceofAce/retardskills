@@ -1,3 +1,5 @@
+import 'server-only';
+
 /**
  * Kit (formerly ConvertKit) v4 API client — newsletter + sequence backend
  * for Retard Skills. The transactional welcome stays on Resend; Kit owns
@@ -57,8 +59,7 @@ export async function kitSubscribeAndTag(
     if (!createRes.ok) {
       // Kit returns 422 when the subscriber already exists — try the GET path.
       if (createRes.status !== 422) {
-        // eslint-disable-next-line no-console
-        console.warn('[kit] subscribe create failed', createRes.status, await createRes.text());
+        console.warn('[kit] subscribe create failed', createRes.status);
         return null;
       }
     }
@@ -82,7 +83,6 @@ export async function kitSubscribeAndTag(
     }
 
     if (!subscriberId) {
-      // eslint-disable-next-line no-console
       console.warn('[kit] could not resolve subscriber id after create');
       return null;
     }
@@ -99,8 +99,7 @@ export async function kitSubscribeAndTag(
         body: JSON.stringify({ fields: options.fields }),
       });
       if (!updateRes.ok && updateRes.status !== 422) {
-        // eslint-disable-next-line no-console
-        console.warn('[kit] subscriber field update failed', updateRes.status, await updateRes.text());
+        console.warn('[kit] subscriber field update failed', updateRes.status);
       }
     }
 
@@ -112,8 +111,7 @@ export async function kitSubscribeAndTag(
 
     if (!tagRes.ok && tagRes.status !== 422) {
       // 422 = already tagged, fine. Other failures we just log.
-      // eslint-disable-next-line no-console
-      console.warn('[kit] tag apply failed', tagRes.status, await tagRes.text());
+      console.warn('[kit] tag apply failed', tagRes.status);
     }
 
     // Step 3: add to the Welcome Sequence so Kit fires the welcome email.
@@ -128,15 +126,13 @@ export async function kitSubscribeAndTag(
       );
       if (!seqRes.ok && seqRes.status !== 422) {
         // 422 = already in sequence, fine.
-        // eslint-disable-next-line no-console
-        console.warn('[kit] sequence add failed', seqRes.status, await seqRes.text());
+        console.warn('[kit] sequence add failed', seqRes.status);
       }
     }
 
     return { subscriberId };
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn('[kit] subscribe error', err);
+    console.warn('[kit] subscribe error', err instanceof Error ? err.name : 'unknown');
     return null;
   }
 }

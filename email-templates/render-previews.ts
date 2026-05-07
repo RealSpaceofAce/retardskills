@@ -3,11 +3,12 @@
  *
  * Run: npx tsx email-templates/render-previews.ts
  *
- * Outputs to /Users/aaronernst/email-preview-*.html, then opens all three
- * in Chrome for side-by-side review.
+ * Outputs to .tmp/email-previews/, then opens all three in Chrome for
+ * side-by-side review.
  */
-import { execSync } from 'node:child_process';
-import { writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { wrapEmail, p, leadP, button, pullQuote, divider } from '../lib/email/template';
 
@@ -71,18 +72,26 @@ const pitchHtml = wrapEmail({
 
 /* ----- Write & open ---------------------------------------------------- */
 
-const out = '/Users/aaronernst';
-writeFileSync(`${out}/email-preview-welcome.html`, welcomeHtml);
-writeFileSync(`${out}/email-preview-newsletter.html`, newsletterHtml);
-writeFileSync(`${out}/email-preview-pitch.html`, pitchHtml);
+const out = join(process.cwd(), '.tmp', 'email-previews');
+mkdirSync(out, { recursive: true });
+
+const previewPaths = [
+  join(out, 'email-preview-welcome.html'),
+  join(out, 'email-preview-newsletter.html'),
+  join(out, 'email-preview-pitch.html'),
+] as const;
+
+writeFileSync(previewPaths[0], welcomeHtml);
+writeFileSync(previewPaths[1], newsletterHtml);
+writeFileSync(previewPaths[2], pitchHtml);
 
 console.log('Wrote three preview files:');
-console.log('  /Users/aaronernst/email-preview-welcome.html    (transactional)');
-console.log('  /Users/aaronernst/email-preview-newsletter.html (Kit broadcast)');
-console.log('  /Users/aaronernst/email-preview-pitch.html      (Kit Sequence, day 28)');
+console.log(`  ${previewPaths[0]} (transactional)`);
+console.log(`  ${previewPaths[1]} (Kit broadcast)`);
+console.log(`  ${previewPaths[2]} (Kit Sequence, day 28)`);
 
 try {
-  execSync('open -a "Google Chrome" /Users/aaronernst/email-preview-welcome.html /Users/aaronernst/email-preview-newsletter.html /Users/aaronernst/email-preview-pitch.html');
+  execFileSync('open', ['-a', 'Google Chrome', ...previewPaths]);
   console.log('Opened all three in Chrome.');
 } catch {
   console.log('(open failed — open the files manually)');

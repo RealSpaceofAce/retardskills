@@ -19,9 +19,10 @@ const styles = `
     --accent: #4B6BFF;
     --accent-soft: #E1E7FF;
     --ok: #2F5D3A;
-    --font-display: 'Big Shoulders Display', 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-serif: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-display: var(--font-big-shoulders), var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-serif: var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
   }
   .rv-root {
     background: var(--paper);

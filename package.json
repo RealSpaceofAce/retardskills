@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "security:secrets": "gitleaks git . --redact --log-level warn && gitleaks dir . --redact --log-level warn",
+    "security:semgrep": "semgrep --config p/default --metrics=off --no-git-ignore --exclude node_modules --exclude .next --exclude .git --exclude .vercel --exclude out --exclude .tmp .",
+    "security:audit": "npm audit --audit-level=moderate",
+    "security:scan": "npm run security:secrets && npm run security:semgrep && npm run security:audit"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.51.0",
@@ -14,7 +18,8 @@
     "next": "16.2.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "resend": "^6.12.3"
+    "resend": "^6.12.3",
+    "server-only": "0.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -25,5 +30,8 @@
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "8.5.14"
   }
 }

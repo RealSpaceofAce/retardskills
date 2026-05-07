@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { Resend } from 'resend';
 
 import { escapeHtml, sanitizeEmailText } from './html';
@@ -314,7 +316,11 @@ interface BetaAdminNotificationOptions {
 }
 
 export async function sendBetaAdminNotification(options: BetaAdminNotificationOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
-  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL ?? 'aaron@bossmode.com';
+  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
+  if (!adminEmail) {
+    return { success: false, error: 'ADMIN_NOTIFICATION_EMAIL is not set' };
+  }
+
   const safeName = escapeHtml(options.name);
   const safeEmail = escapeHtml(options.email);
   const safeAgentName = escapeHtml(options.agentName);

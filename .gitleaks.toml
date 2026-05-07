@@ -1,0 +1,13 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated build, dependency, deployment-link, and local preview artifacts"
+paths = [
+  '''^\.next/''',
+  '''^node_modules/''',
+  '''^out/''',
+  '''^\.vercel/''',
+  '''^\.tmp/''',
+  '''^.*\.tsbuildinfo$''',
+]

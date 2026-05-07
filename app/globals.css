@@ -14,7 +14,7 @@ html, body {
 }
 
 body {
-  font-family: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
+  font-family: var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }

@@ -21,6 +21,8 @@ import { NextResponse } from 'next/server';
 import { checkRequestRateLimit, createRateLimitHeaders } from "@/lib/api-rate-limit";
 import { runConvexAdminMutation } from "@/lib/convexAdmin";
 import { kitSubscribeAndTag } from "@/lib/kit";
+import { getPublicBaseUrl } from '@/lib/public-url';
+import { NO_STORE_HEADERS, withNoStore } from '@/lib/security';
 import {
   RETARDSKILL_SESSION_COOKIE_NAME,
   createRetardSkillSessionToken,
@@ -29,19 +31,13 @@ import {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function getBaseUrl(request: Request): string {
-  const host = request.headers.get('host') ?? 'retardskills.com';
-  const proto = request.headers.get('x-forwarded-proto') ?? 'https';
-  return `${proto}://${host}`;
-}
-
 export async function POST(request: Request): Promise<Response> {
   try {
     const rateLimitResult = await checkRequestRateLimit(request, '/api/signup');
     if (rateLimitResult && !rateLimitResult.allowed) {
       return Response.json(
         { error: 'Too many requests' },
-        { status: 429, headers: createRateLimitHeaders(rateLimitResult) },
+        { status: 429, headers: { ...createRateLimitHeaders(rateLimitResult), ...NO_STORE_HEADERS } },
       );
     }
 
@@ -64,8 +60,8 @@ export async function POST(request: Request): Promise<Response> {
       email,
     });
 
-    const baseUrl = getBaseUrl(request);
-    const sessionToken = createRetardSkillSessionToken(email);
+    const baseUrl = getPublicBaseUrl(request);
+    const sessionToken = createRetardSkillSessionToken();
     // Cross-device welcome link — when the user clicks it from email, /api/access
     // verifies the token + sets their access cookie on whichever device opens it.
     const welcomeLink = `${baseUrl}/api/access?t=${encodeURIComponent(sessionToken)}`;
@@ -78,7 +74,7 @@ export async function POST(request: Request): Promise<Response> {
     void kitSubscribeAndTag(email, {
       fields: { welcome_link: welcomeLink },
     }).catch((err) => {
-      Sentry.captureException(err, { extra: { context: 'kit subscribe', email } });
+      Sentry.captureException(err, { extra: { context: 'kit subscribe' } });
     });
 
     // Set the access cookie on the signup device so the immediate redirect
@@ -89,9 +85,9 @@ export async function POST(request: Request): Promise<Response> {
       message: 'Skill access granted. Email also on its way.',
     });
     response.cookies.set(RETARDSKILL_SESSION_COOKIE_NAME, sessionToken, retardSkillSessionCookieOptions);
-    return response;
+    return withNoStore(response);
   } catch (error) {
     Sentry.captureException(error, { level: 'error' });
-    return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400 });
+    return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400, headers: NO_STORE_HEADERS });
   }
 }

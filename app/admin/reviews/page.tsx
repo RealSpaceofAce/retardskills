@@ -26,7 +26,7 @@ const styles = `
   .ar-root {
     background: #FAFAF7;
     color: #1A1A1A;
-    font-family: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
+    font-family: var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
     font-size: 16px;
     line-height: 1.55;
     min-height: 100vh;
@@ -34,7 +34,7 @@ const styles = `
   }
   .ar-page { max-width: 880px; margin: 0 auto; }
   .ar-eyebrow {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
@@ -43,7 +43,7 @@ const styles = `
     margin-bottom: 16px;
   }
   .ar-title {
-    font-family: 'Source Serif 4', serif;
+    font-family: var(--font-source-serif-4), serif;
     font-weight: 700;
     font-size: 44px;
     line-height: 1.05;
@@ -63,7 +63,7 @@ const styles = `
     margin-bottom: 32px;
   }
   .ar-tab {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 13px;
     font-weight: 600;
     padding: 10px 16px;
@@ -104,14 +104,14 @@ const styles = `
     flex-wrap: wrap;
   }
   .ar-name {
-    font-family: 'Source Serif 4', serif;
+    font-family: var(--font-source-serif-4), serif;
     font-weight: 700;
     font-size: 22px;
     color: #1A1A1A;
   }
   .ar-name .email { color: #8A8A86; font-weight: 400; font-size: 14px; margin-left: 8px; }
   .ar-meta {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -134,7 +134,7 @@ const styles = `
 
   .ar-field { margin-bottom: 12px; }
   .ar-field-label {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.16em;
@@ -144,7 +144,7 @@ const styles = `
     display: block;
   }
   .ar-field-value {
-    font-family: 'Source Serif 4', serif;
+    font-family: var(--font-source-serif-4), serif;
     font-size: 15px;
     line-height: 1.5;
     color: #1A1A1A;
@@ -164,7 +164,7 @@ const styles = `
   }
   .ar-btn {
     padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -184,7 +184,7 @@ const styles = `
   .ar-btn-undo { font-size: 11px; padding: 6px 12px; }
 
   .ar-permission {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 11px;
     color: #8A8A86;
     text-transform: uppercase;
@@ -206,7 +206,7 @@ const styles = `
     margin-top: 64px;
     padding-top: 24px;
     border-top: 1px solid #E5E3DC;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 12px;
     color: #8A8A86;
   }
@@ -243,8 +243,23 @@ export default function AdminReviewsPage() {
   }, []);
 
   useEffect(() => {
-    void refresh();
-  }, [refresh]);
+    let cancelled = false;
+
+    void (async () => {
+      try {
+        const data = await fetchAdminJson<{ reviews: Review[] }>('/api/admin/reviews');
+        if (!cancelled) setReviews(data.reviews ?? []);
+      } catch (err) {
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Failed to load.');
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const counts = useMemo(() => {
     const c = { pending: 0, approved: 0, rejected: 0, all: reviews.length };

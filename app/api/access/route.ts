@@ -17,6 +17,7 @@ import {
   retardSkillSessionCookieOptions,
   verifyRetardSkillSessionToken,
 } from "@/lib/session";
+import { withNoStore } from '@/lib/security';
 
 export async function GET(request: Request): Promise<Response> {
   const url = new URL(request.url);
@@ -25,11 +26,11 @@ export async function GET(request: Request): Promise<Response> {
   if (!token || !verifyRetardSkillSessionToken(token)) {
     const denied = new URL("/", url);
     denied.searchParams.set('gate', 'token_invalid');
-    return NextResponse.redirect(denied, 302);
+    return withNoStore(NextResponse.redirect(denied, 302));
   }
 
   const destination = new URL('/skills', url);
   const response = NextResponse.redirect(destination, 302);
   response.cookies.set(RETARDSKILL_SESSION_COOKIE_NAME, token, retardSkillSessionCookieOptions);
-  return response;
+  return withNoStore(response);
 }

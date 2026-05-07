@@ -9,8 +9,9 @@
 import * as Sentry from '@sentry/nextjs';
 
 import { checkRequestRateLimit, createRateLimitHeaders } from "@/lib/api-rate-limit";
-import { runConvexAdminMutation, runConvexAdminQuery } from "@/lib/convexAdmin";
+import { runConvexAdminMutation } from "@/lib/convexAdmin";
 import { sendEmail } from "@/lib/email";
+import { NO_STORE_HEADERS } from '@/lib/security';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,7 +23,7 @@ export async function POST(request: Request): Promise<Response> {
     if (rateLimitResult && !rateLimitResult.allowed) {
       return Response.json(
         { error: 'Too many requests' },
-        { status: 429, headers: createRateLimitHeaders(rateLimitResult) },
+        { status: 429, headers: { ...createRateLimitHeaders(rateLimitResult), ...NO_STORE_HEADERS } },
       );
     }
 
@@ -39,13 +40,13 @@ export async function POST(request: Request): Promise<Response> {
     const permissionToShare = body.permissionToShare === true;
 
     if (!email || !EMAIL_REGEX.test(email)) {
-      return Response.json({ error: 'Valid email required' }, { status: 400 });
+      return Response.json({ error: 'Valid email required' }, { status: 400, headers: NO_STORE_HEADERS });
     }
     if (!skill || !ALLOWED_SKILLS.has(skill)) {
-      return Response.json({ error: 'Invalid skill' }, { status: 400 });
+      return Response.json({ error: 'Invalid skill' }, { status: 400, headers: NO_STORE_HEADERS });
     }
     if (recommendScore !== undefined && (recommendScore < 1 || recommendScore > 10)) {
-      return Response.json({ error: 'Recommend score must be 1–10' }, { status: 400 });
+      return Response.json({ error: 'Recommend score must be 1–10' }, { status: 400, headers: NO_STORE_HEADERS });
     }
 
     await runConvexAdminMutation('retardSkillReviews:insertReview', {
@@ -75,10 +76,13 @@ export async function POST(request: Request): Promise<Response> {
       Sentry.captureException(error, { extra: { context: 'retardskill review admin notification' } });
     });
 
-    return Response.json({ ok: true, message: 'Thanks. Reviewed within 48 hours before going public.' });
+    return Response.json(
+      { ok: true, message: 'Thanks. Reviewed within 48 hours before going public.' },
+      { headers: NO_STORE_HEADERS },
+    );
   } catch (error) {
     Sentry.captureException(error, { level: 'error' });
-    return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400 });
+    return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400, headers: NO_STORE_HEADERS });
   }
 }
 
@@ -95,7 +99,9 @@ type ReviewSummary = {
 };
 
 async function notifyAdminOfPendingReview(review: ReviewSummary) {
-  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL ?? 'aaron@bossmode.com';
+  const adminEmail = process.env.ADMIN_NOTIFICATION_EMAIL;
+  if (!adminEmail) return;
+
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://retardskills.com';
   const reviewUrl = `${baseUrl}/admin/reviews`;
 

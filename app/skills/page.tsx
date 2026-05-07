@@ -27,9 +27,10 @@ const styles = `
     --accent-soft: #E1E7FF;
     --ok: #2F5D3A;
     --ok-soft: #DCE8E0;
-    --font-display: 'Big Shoulders Display', 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-serif: 'Source Serif 4', 'Iowan Old Style', Charter, Georgia, serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-display: var(--font-big-shoulders), var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-serif: var(--font-source-serif-4), 'Iowan Old Style', Charter, Georgia, serif;
+    --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+    --font-mono: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
   }
   .sk-root {
     background: var(--paper);
@@ -206,7 +207,7 @@ const styles = `
   .sk-howto-body p:last-child { margin-bottom: 0; }
   .sk-howto-body strong { color: var(--ink); font-weight: 600; }
   .sk-howto-body code {
-    font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+    font-family: var(--font-ibm-plex-mono), ui-monospace, SFMono-Regular, monospace;
     font-size: 0.9em;
     background: var(--accent-soft);
     padding: 1px 6px;
@@ -297,7 +298,7 @@ const styles = `
   .sk-install-list code,
   .sk-install-step code,
   .sk-install-aside code {
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
     font-size: 0.88em;
     background: #fff;
     padding: 2px 6px;

@@ -1,3 +1,5 @@
+import 'server-only';
+
 /**
  * Minimal in-memory rate limiter. Beta-grade — fine for retardskills.com
  * traffic. If volume grows, swap for a shared store (Redis / Convex).

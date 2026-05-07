@@ -1,6 +1,33 @@
 import type { Metadata } from 'next';
+import { Big_Shoulders_Display, IBM_Plex_Mono, Inter, Source_Serif_4 } from 'next/font/google';
 
 import './globals.css';
+
+const bigShoulders = Big_Shoulders_Display({
+  subsets: ['latin'],
+  weight: ['800', '900'],
+  variable: '--font-big-shoulders',
+  display: 'swap',
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-source-serif-4',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-ibm-plex-mono',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://retardskills.com'),
@@ -42,15 +69,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html
+      lang="en"
+      className={`${bigShoulders.variable} ${sourceSerif.variable} ${inter.variable} ${ibmPlexMono.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

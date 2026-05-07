@@ -678,6 +678,9 @@ export default function RetardSkillPage() {
               <p className="rs-tagline">
                 The retard only knows what they want. The retard isn&apos;t ashamed of what they want. <strong>The retard ships.</strong>
               </p>
+              <p className="rs-tagline-sub">
+                Overthinking is what&rsquo;s costing you the customer, the deal, the partner, the goal you wrote five years ago. <strong>Six skills cut through your own.</strong>
+              </p>
             </div>
             <a className="rs-hero-cue" href="#rs-form-block" aria-label="Go retarded">
               <span>Go retarded</span>

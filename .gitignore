@@ -2,9 +2,21 @@ node_modules
 .next
 out
 .vercel
+.tmp
+
+# Local secrets / credentials. Keep names in .env.example only.
 .env
-.env.local
-.env*.local
+.env.*
+!.env.example
+.envrc
+*.pem
+*.key
+*.p8
+*.p12
+*.crt
+
+# Local/editor/build noise.
 .DS_Store
+*.log
 *.tsbuildinfo
 next-env.d.ts
