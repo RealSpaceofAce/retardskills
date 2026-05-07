@@ -16,6 +16,7 @@ import { NextResponse } from 'next/server';
 import { checkRequestRateLimit, createRateLimitHeaders } from "@/lib/api-rate-limit";
 import { runConvexAdminMutation } from "@/lib/convexAdmin";
 import { sendEmail } from "@/lib/email";
+import { kitSubscribeAndTag } from "@/lib/kit";
 import {
   RETARDSKILL_SESSION_COOKIE_NAME,
   createRetardSkillSessionToken,
@@ -57,6 +58,12 @@ export async function POST(request: Request): Promise<Response> {
     });
     await runConvexAdminMutation('newsletterSubscribers:markConfirmed', {
       email,
+    });
+
+    // Subscribe to the Retard Reports newsletter on Kit + apply signup tag.
+    // Fire-and-forget — Convex stays the source of truth, Kit sync is best-effort.
+    void kitSubscribeAndTag(email).catch((err) => {
+      Sentry.captureException(err, { extra: { context: 'kit subscribe', email } });
     });
 
     const baseUrl = getBaseUrl(request);
