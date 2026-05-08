@@ -99,11 +99,14 @@ export default function RetardSkillSignup() {
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: formStyles }} />
-      <form className="rs-form" onSubmit={handleSubmit}>
+      <form className="rs-form" action="/api/signup" method="post" onSubmit={handleSubmit}>
         <input
           id="rs-email-input"
           type="email"
+          name="email"
           required
+          autoComplete="email"
+          inputMode="email"
           placeholder="you@yourbusiness.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

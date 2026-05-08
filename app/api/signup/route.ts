@@ -31,24 +31,141 @@ import {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+type ResponseMode = 'json' | 'html';
+
+type SignupSubmission = {
+  email: string;
+  responseMode: ResponseMode;
+};
+
+function contentTypeIncludes(request: Request, value: string): boolean {
+  return request.headers.get('content-type')?.toLowerCase().includes(value) ?? false;
+}
+
+function acceptsHtml(request: Request): boolean {
+  const accept = request.headers.get('accept')?.toLowerCase() ?? '';
+  return accept.includes('text/html') && !accept.includes('application/json');
+}
+
+function getResponseMode(request: Request): ResponseMode {
+  // Browser-native form submissions must work even when hydration/client JS fails.
+  // The React client path still sends JSON and gets JSON back for inline status UI.
+  if (
+    contentTypeIncludes(request, 'application/x-www-form-urlencoded') ||
+    contentTypeIncludes(request, 'multipart/form-data') ||
+    acceptsHtml(request)
+  ) {
+    return 'html';
+  }
+  return 'json';
+}
+
+async function readSignupSubmission(request: Request): Promise<SignupSubmission> {
+  const responseMode = getResponseMode(request);
+
+  if (contentTypeIncludes(request, 'application/x-www-form-urlencoded') || contentTypeIncludes(request, 'multipart/form-data')) {
+    const formData = await request.formData();
+    const emailValue = formData.get('email');
+    return {
+      email: typeof emailValue === 'string' ? emailValue.trim().toLowerCase() : '',
+      responseMode,
+    };
+  }
+
+  if (contentTypeIncludes(request, 'application/json')) {
+    const body = (await request.json().catch(() => null)) as { email?: unknown } | null;
+    return {
+      email: typeof body?.email === 'string' ? body.email.trim().toLowerCase() : '',
+      responseMode,
+    };
+  }
+
+  return { email: '', responseMode };
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
+}
+
+function htmlMessageResponse(
+  title: string,
+  message: string,
+  status: number,
+  headers: HeadersInit = {},
+): Response {
+  const safeTitle = escapeHtml(title);
+  const safeMessage = escapeHtml(message);
+  return new Response(
+    `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${safeTitle}</title><style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#FAFAF7;color:#1A1A1A;min-height:100vh;display:grid;place-items:center;margin:0;padding:24px}.card{max-width:560px;border:1px solid #1A1A1A;background:#fff;padding:32px;text-align:center}h1{font-size:24px;margin:0 0 12px}p{line-height:1.5}a{color:#4B6BFF;font-weight:700}</style></head><body><main class="card"><h1>${safeTitle}</h1><p>${safeMessage}</p><p><a href="/#rs-form-block">Back to the signup form</a></p></main></body></html>`,
+    {
+      status,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        ...NO_STORE_HEADERS,
+        ...headers,
+      },
+    },
+  );
+}
+
+function errorResponse(message: string, status: number, responseMode: ResponseMode): Response {
+  if (responseMode === 'html') {
+    return htmlMessageResponse('Signup failed', message, status);
+  }
+
+  return Response.json(
+    { error: message },
+    { status, headers: NO_STORE_HEADERS },
+  );
+}
+
+function successResponse(request: Request, sessionToken: string, responseMode: ResponseMode): Response {
+  const response = responseMode === 'html'
+    ? NextResponse.redirect(new URL('/skills', request.url), { status: 303 })
+    : NextResponse.json({
+        ok: true,
+        redirect: '/skills',
+        message: 'Skill access granted. Email also on its way.',
+      });
+
+  response.cookies.set(RETARDSKILL_SESSION_COOKIE_NAME, sessionToken, retardSkillSessionCookieOptions);
+  return withNoStore(response);
+}
+
 export async function POST(request: Request): Promise<Response> {
+  const responseMode = getResponseMode(request);
+
   try {
     const rateLimitResult = await checkRequestRateLimit(request, '/api/signup');
     if (rateLimitResult && !rateLimitResult.allowed) {
+      const headers = { ...createRateLimitHeaders(rateLimitResult), ...NO_STORE_HEADERS };
+      if (responseMode === 'html') {
+        return htmlMessageResponse(
+          'Too many requests',
+          'Too many signup attempts. Wait a minute and try again.',
+          429,
+          headers,
+        );
+      }
       return Response.json(
         { error: 'Too many requests' },
-        { status: 429, headers: { ...createRateLimitHeaders(rateLimitResult), ...NO_STORE_HEADERS } },
+        { status: 429, headers },
       );
     }
 
-    const body = (await request.json()) as { email?: unknown };
-    const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
+    const submission = await readSignupSubmission(request);
+    const email = submission.email;
 
     if (!email || !EMAIL_REGEX.test(email)) {
-      return Response.json({ error: 'Valid email required' }, { status: 400 });
+      return errorResponse('Valid email required', 400, submission.responseMode);
     }
     if (email.length > 254) {
-      return Response.json({ error: 'Email too long (max 254 chars)' }, { status: 400 });
+      return errorResponse('Email too long (max 254 chars)', 400, submission.responseMode);
     }
 
     // Insert (idempotent) and mark confirmed in one shot — lead-magnet doesn't need double opt-in.
@@ -78,16 +195,11 @@ export async function POST(request: Request): Promise<Response> {
     });
 
     // Set the access cookie on the signup device so the immediate redirect
-    // to /skills passes the gate.
-    const response = NextResponse.json({
-      ok: true,
-      redirect: '/skills',
-      message: 'Skill access granted. Email also on its way.',
-    });
-    response.cookies.set(RETARDSKILL_SESSION_COOKIE_NAME, sessionToken, retardSkillSessionCookieOptions);
-    return withNoStore(response);
+    // to /skills passes the gate. Browser-native form posts get a 303 so the
+    // flow works without client JavaScript; the hydrated client gets JSON.
+    return successResponse(request, sessionToken, submission.responseMode);
   } catch (error) {
     Sentry.captureException(error, { level: 'error' });
-    return Response.json({ error: 'Something went wrong. Try again.' }, { status: 400, headers: NO_STORE_HEADERS });
+    return errorResponse('Something went wrong. Try again.', 400, responseMode);
   }
 }

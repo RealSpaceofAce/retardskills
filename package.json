@@ -10,7 +10,8 @@
     "security:secrets": "gitleaks git . --redact --log-level warn && gitleaks dir . --redact --log-level warn",
     "security:semgrep": "semgrep --config p/default --metrics=off --no-git-ignore --exclude node_modules --exclude .next --exclude .git --exclude .vercel --exclude out --exclude .tmp .",
     "security:audit": "npm audit --audit-level=moderate",
-    "security:scan": "npm run security:secrets && npm run security:semgrep && npm run security:audit"
+    "security:scan": "npm run security:secrets && npm run security:semgrep && npm run security:audit",
+    "test:signup": "node scripts/smoke-signup-form.mjs"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.51.0",
